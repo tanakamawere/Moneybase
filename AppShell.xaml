@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Moneybase.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:local="clr-namespace:Moneybase"
+    xmlns:pages="clr-namespace:Moneybase.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.FlyoutBehavior="Disabled">
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource GrayBackground}, Dark={StaticResource Black}}" StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}" />
+    </Shell.Behaviors>
+    <TabBar>
+        <Tab Title="Home">
+            <Tab.Icon>
+                <FontImageSource FontFamily="fasolid" Glyph="{x:Static helpers:FontAwesome.House}" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
+        </Tab>
+        <Tab Title="Statistics">
+            <Tab.Icon>
+                <FontImageSource FontFamily="fasolid" Glyph="{x:Static helpers:FontAwesome.ChartBar}" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate pages:StatisticsPage}" />
+        </Tab>
+    </TabBar>
+
+</Shell>
