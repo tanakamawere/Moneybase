@@ -1,0 +1,5 @@
+﻿namespace Moneybase;
+
+class Imports
+{
+}

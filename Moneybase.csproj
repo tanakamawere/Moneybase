@@ -49,6 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\default_transaction.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\fabrands.otf" />
 	  <None Remove="Resources\Fonts\faregular.otf" />
 	  <None Remove="Resources\Fonts\fasolid.otf" />
@@ -67,9 +71,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
-	  <Folder Include="Services\" />
-	  <Folder Include="ViewModels\" />
+	  <ProjectReference Include="..\MoneybaseLibrary\MoneybaseLibrary.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

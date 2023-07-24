@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Moneybase.Pages;
+using Moneybase.Services;
+using Moneybase.ViewModels;
 
 namespace Moneybase;
 
@@ -23,6 +26,14 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+		//Pages
+		builder.Services.AddSingleton<HomePage>();
+
+		//View Models
+		builder.Services.AddSingleton<HomePageViewModel>();
+
+		//Services
+		builder.Services.AddTransient<IApiRepository, ApiRepository>();
 
 		return builder.Build();
 	}
