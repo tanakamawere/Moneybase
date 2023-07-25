@@ -24,7 +24,7 @@
                     <Label
                         FontAttributes="Bold"
                         FontSize="Small"
-                        Text="Welcome back"
+                        Text="Welcome Back"
                         TextColor="{StaticResource Gray300}" />
                     <Label
                         FontAttributes="Bold"
@@ -61,19 +61,20 @@
                     StrokeShape="RoundRectangle 50"
                     StrokeThickness="0"
                     WidthRequest="50">
-                    <Image
+                    <ImageButton
                         BackgroundColor="White"
+                        Command="{Binding SignOutCommand}"
                         HeightRequest="24"
                         WidthRequest="24">
-                        <Image.Source>
+                        <ImageButton.Source>
                             <FontImageSource
                                 FontFamily="fasolid"
                                 Glyph="{x:Static helpers:FontAwesome.Phone}"
                                 Size="24"
                                 Color="{AppThemeBinding Light={StaticResource Primary},
                                                         Dark={StaticResource White}}" />
-                        </Image.Source>
-                    </Image>
+                        </ImageButton.Source>
+                    </ImageButton>
                 </Border>
             </Grid>
 

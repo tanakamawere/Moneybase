@@ -7,7 +7,7 @@ public class ApiRepository : IApiRepository
 {
     private static readonly HttpClient _httpClient = new HttpClient()
     {
-        BaseAddress = new Uri("https://b30c-77-246-52-36.ngrok-free.app")
+        BaseAddress = new Uri("http://10.0.2.2:5052/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()
@@ -48,5 +48,10 @@ public class ApiRepository : IApiRepository
     public async void PostUser(User user)
     {
         await _httpClient.PostAsJsonAsync($"/users/add/{user}", user);
+    }
+
+    public async Task<bool> UserIsNew(string email)
+    {
+        return await _httpClient.GetFromJsonAsync<bool>($"/users/user_is_new/{email}");
     }
 }

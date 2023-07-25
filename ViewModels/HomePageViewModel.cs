@@ -1,6 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Moneybase.MSALClient;
+using Moneybase.Pages;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
+
 namespace Moneybase.ViewModels;
 
 public partial class HomePageViewModel : ObservableObject
@@ -11,10 +15,20 @@ public partial class HomePageViewModel : ObservableObject
     IEnumerable<Account> userAccounts;
 
     private readonly IApiRepository repository;
+    private PublicClientSingleton publicClientSingleton;
+
+    [ObservableProperty]
+    string[] accessTokenScopes = new string[] { "No scopes found in access token" };
+    [ObservableProperty]
+    string userName;
+    [ObservableProperty]
+    string email;
+
 
     public HomePageViewModel(IApiRepository repo)
     {
         repository = repo;
+        publicClientSingleton = new PublicClientSingleton();
 
         GetUser();
     }
@@ -30,5 +44,16 @@ public partial class HomePageViewModel : ObservableObject
         {
             throw ex;
         }
+    }
+
+    [RelayCommand]
+    private async Task SignOut()
+    {
+        await publicClientSingleton.SignOutAsync().ContinueWith((t) =>
+        {
+            return Task.CompletedTask;
+        });
+
+        Application.Current.MainPage = new LandingShell();
     }
 }

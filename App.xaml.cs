@@ -1,11 +1,12 @@
-﻿namespace Moneybase;
+﻿using Moneybase.Pages;
+
+namespace Moneybase;
 
 public partial class App : Application
 {
-	public App()
+    public App()
 	{
 		InitializeComponent();
-
-		MainPage = new AppShell();
-	}
+        MainPage = new LandingShell();
+    }
 }

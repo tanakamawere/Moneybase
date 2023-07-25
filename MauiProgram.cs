@@ -26,11 +26,12 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-		//Pages
-		builder.Services.AddSingleton<HomePage>();
+        //Pages
+        builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<AppLandingPage>();
 
-		//View Models
-		builder.Services.AddSingleton<HomePageViewModel>();
+        //View Models
+        builder.Services.AddSingleton<HomePageViewModel>();
 
 		//Services
 		builder.Services.AddTransient<IApiRepository, ApiRepository>();

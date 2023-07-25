@@ -28,6 +28,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -56,6 +57,7 @@
 	  <None Remove="Resources\Fonts\fabrands.otf" />
 	  <None Remove="Resources\Fonts\faregular.otf" />
 	  <None Remove="Resources\Fonts\fasolid.otf" />
+	  <None Remove="Resources\Images\applandingpic.jpg" />
 	  <None Remove="Resources\Images\card_bg.jpg" />
 	  <None Remove="Resources\Images\dstv_logo.jpeg" />
 	  <None Remove="Resources\Images\ok_logo.png" />
@@ -65,9 +67,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.54.1" />
+		<PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="2.31.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,13 +79,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="LandingShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AppLandingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LoginPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\SignupPage.xaml">
+	  <MauiXaml Update="Pages\SignUpPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\StatisticsPage.xaml">

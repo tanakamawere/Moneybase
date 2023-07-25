@@ -10,6 +10,7 @@ public interface IApiRepository
 
     Task<User> GetUser(int id);
     Task<Account> GetAccount(int userId);
+    Task<bool> UserIsNew(string email);
 
     void PostUser(User user);
     void PostAccount(Account account);

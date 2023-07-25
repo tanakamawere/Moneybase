@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.AppLandingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="AppLandingPage"
+    BackgroundImageSource="applandingpic.jpg">
+
+    <Grid>
+        <Label
+            Margin="20"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                        FontAttributes="Bold"
+                        FontSize="Title"
+                        Text="Money"
+                        TextColor="{AppThemeBinding Light={StaticResource White},
+                                                    Dark={StaticResource White}}" />
+                    <Span
+                        FontAttributes="Bold"
+                        FontSize="Title"
+                        Text="base"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary},
+                                                    Dark={StaticResource White}}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Button
+            x:Name="SignInButton"
+            Margin="20"
+            BackgroundColor="Transparent"
+            BorderColor="{AppThemeBinding Light={StaticResource White},
+                                          Dark={StaticResource White}}"
+            BorderWidth="3"
+            Clicked="OnSignInClicked"
+            FontAttributes="Bold"
+            FontSize="Large"
+            Text="Get Started"
+            TextColor="{AppThemeBinding Light={StaticResource White},
+                                        Dark={StaticResource White}}"
+            VerticalOptions="End" />
+    </Grid>
+</ContentPage>
