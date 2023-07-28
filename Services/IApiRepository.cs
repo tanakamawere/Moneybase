@@ -5,12 +5,12 @@ namespace Moneybase.Services;
 public interface IApiRepository
 {
     Task<IEnumerable<User>> GetUsersAsync();
-    Task<IEnumerable<Account>> GetAccountsAsync(int id);
+    Task<IEnumerable<Account>> GetAccountsAsync(string id);
     Task<IEnumerable<Transaction>> GetTransactionsAsync();
 
-    Task<User> GetUser(int id);
+    Task<User> GetUser(string authId);
     Task<Account> GetAccount(int userId);
-    Task<bool> UserIsNew(string email);
+    Task<FirstTimeUser> UserIsNew(string authId);
 
     void PostUser(User user);
     void PostAccount(Account account);

@@ -1,6 +1,4 @@
-﻿using Moneybase.Pages;
-
-namespace Moneybase;
+﻿namespace Moneybase;
 
 public partial class App : Application
 {

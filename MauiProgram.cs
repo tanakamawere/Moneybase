@@ -28,10 +28,13 @@ public static class MauiProgram
 #endif
         //Pages
         builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<StatisticsPage>();
+
         builder.Services.AddSingleton<AppLandingPage>();
 
         //View Models
         builder.Services.AddSingleton<HomePageViewModel>();
+		builder.Services.AddSingleton<AppLandingViewModel>();
 
 		//Services
 		builder.Services.AddTransient<IApiRepository, ApiRepository>();

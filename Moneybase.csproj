@@ -79,7 +79,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="LandingShell.xaml">
+	  <MauiXaml Update="Pages\LandingShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\AppLandingPage.xaml">

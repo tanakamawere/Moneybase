@@ -30,6 +30,13 @@ public class PublicClientSingleton
         MSALClientHelper.UseEmbedded = UseEmbedded;
         return await MSALClientHelper.SignInUserInteractivelyAsync(scopes).ConfigureAwait(false);
     }
+
+    public async Task<AuthenticationResult> CheckIfUserAlreadyLoggedIn(string[] scopes)
+    {
+        return await MSALClientHelper.FetchUserLoggedIn(scopes).ConfigureAwait(false);
+    }
+
+
     internal async Task SignOutAsync()
     {
         await MSALClientHelper.SignOutUserAsync().ConfigureAwait(false);

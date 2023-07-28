@@ -52,7 +52,22 @@ public class MSALClientHelper
             .ConfigureAwait(false);
     }
 
-    public async Task<AuthenticationResult> SignInUserAndAcquireAccessToken(string[] scopes)
+    public async Task<AuthenticationResult> FetchUserLoggedIn(string[] scopes)
+    {
+        var existingUser = await FetchSignedInUserFromCache().ConfigureAwait(false);
+
+        if (existingUser != null)
+        {
+            AuthResult = await PublicClientApplication
+                .AcquireTokenSilent(scopes, existingUser)
+                .ExecuteAsync()
+                .ConfigureAwait(false);
+        }
+        return AuthResult;
+    }
+
+
+        public async Task<AuthenticationResult> SignInUserAndAcquireAccessToken(string[] scopes)
     {
         Exception<NullReferenceException>.ThrowOn(() => PublicClientApplication == null, PCANotInitializedExceptionMessage);
 

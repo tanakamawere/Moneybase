@@ -15,7 +15,7 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<IEnumerable<User>>("/users");
     }
 
-    public async Task<IEnumerable<Account>> GetAccountsAsync(int id)
+    public async Task<IEnumerable<Account>> GetAccountsAsync(string id)
     {
         return await _httpClient.GetFromJsonAsync<IEnumerable<Account>>($"/accounts/get/{id}");
     }
@@ -30,9 +30,9 @@ public class ApiRepository : IApiRepository
         //DOES NOT WORK
         return await _httpClient.GetFromJsonAsync<Account>($"/accounts/get/{userId}");
     }
-    public async Task<User> GetUser(int id)
+    public async Task<User> GetUser(string authId)
     {
-        return await _httpClient.GetFromJsonAsync<User>($"/users/get/{id}");
+        return await _httpClient.GetFromJsonAsync<User>($"/users/get/{authId}");
     }
 
     public async void PostAccount(Account account)
@@ -50,8 +50,8 @@ public class ApiRepository : IApiRepository
         await _httpClient.PostAsJsonAsync($"/users/add/{user}", user);
     }
 
-    public async Task<bool> UserIsNew(string email)
+    public async Task<FirstTimeUser> UserIsNew(string authId)
     {
-        return await _httpClient.GetFromJsonAsync<bool>($"/users/user_is_new/{email}");
+        return await _httpClient.GetFromJsonAsync<FirstTimeUser>($"/users/user_is_new/{authId}");
     }
 }
