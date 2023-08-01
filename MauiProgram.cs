@@ -1,8 +1,13 @@
-﻿using CommunityToolkit.Maui;
+﻿using Camera.MAUI;
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
-using Moneybase.Pages;
+using Moneybase.Pages.SendMoneyPages;
 using Moneybase.Services;
-using Moneybase.ViewModels;
+using Mopups.Hosting;
+using Mopups.Interfaces;
+using Mopups.Services;
+using The49.Maui.BottomSheet;
 
 namespace Moneybase;
 
@@ -14,6 +19,11 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+			.ConfigureMopups()
+			.UseMauiCameraView()
+			.UseBottomSheet()
+            .ConfigureViewModels()
+			.ConfigurePages()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -26,18 +36,9 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-        //Pages
-        builder.Services.AddSingleton<HomePage>();
-        builder.Services.AddSingleton<StatisticsPage>();
+		builder.Services.AddTransient<IApiRepository, ApiRepository>();		builder.Services.AddTransient<SendCurrencyBottomSheet>();
+		builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
 
-        builder.Services.AddSingleton<AppLandingPage>();
-
-        //View Models
-        builder.Services.AddSingleton<HomePageViewModel>();
-		builder.Services.AddSingleton<AppLandingViewModel>();
-
-		//Services
-		builder.Services.AddTransient<IApiRepository, ApiRepository>();
 
 		return builder.Build();
 	}

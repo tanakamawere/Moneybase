@@ -12,7 +12,7 @@ public interface IApiRepository
     Task<Account> GetAccount(int userId);
     Task<FirstTimeUser> UserIsNew(string authId);
 
-    void PostUser(User user);
-    void PostAccount(Account account);
-    void PostTransaction(Transaction transaction);
+    Task PostUser(User user);
+    Task PostAccount(Account account);
+    Task PostTransaction(Transaction transaction);
 }

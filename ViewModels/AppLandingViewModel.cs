@@ -36,8 +36,15 @@ public partial class AppLandingViewModel : ViewModelBase
 
     public void CheckIfLoggedIn()
     {
-        AuthenticationResult result = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
-        if (result != null)
-            Application.Current.MainPage = new AppShell();
+        try
+        {
+            AuthenticationResult result = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
+            if (result != null)
+                Application.Current.MainPage = new AppShell();
+        }
+        catch (Exception)
+        {
+            Shell.Current.DisplayAlert("Error", "There's been an error trying to automatically log you in. Please try again", "Ok");
+        }
     }
 }

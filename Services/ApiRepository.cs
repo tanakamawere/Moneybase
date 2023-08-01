@@ -35,17 +35,17 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<User>($"/users/get/{authId}");
     }
 
-    public async void PostAccount(Account account)
+    public async Task PostAccount(Account account)
     {
         await _httpClient.PostAsJsonAsync($"/accounts/add/{account}", account);
     }
 
-    public async void PostTransaction(Transaction transaction)
+    public async Task PostTransaction(Transaction transaction)
     {
         await _httpClient.PostAsJsonAsync($"/transaction/post/{transaction}", transaction);
     }
 
-    public async void PostUser(User user)
+    public async Task PostUser(User user)
     {
         await _httpClient.PostAsJsonAsync($"/users/add/{user}", user);
     }

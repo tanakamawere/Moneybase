@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet
+    x:Class="Moneybase.Pages.SendMoneyPages.SendCurrencyBottomSheet"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+    BackgroundColor="{AppThemeBinding Light={StaticResource GrayBackground},
+                                      Dark={StaticResource Gray600}}"
+    HandleColor="{AppThemeBinding Light={StaticResource Primary},
+                                  Dark={StaticResource White}}"
+    HasBackdrop="True"
+    HasHandle="True">
+
+    <the49:BottomSheet.Detents>
+        <!--  Stop at the height of the divider view  -->
+        <the49:AnchorDetent Anchor="{x:Reference DividerReference}" />
+    </the49:BottomSheet.Detents>
+
+
+    <VerticalStackLayout Spacing="16">
+        <Label
+            Margin="5"
+            FontAttributes="Bold"
+            FontSize="30"
+            HorizontalOptions="CenterAndExpand"
+            Text="Choose the currency to send" />
+
+        <BoxView x:Name="divider" />
+
+        <Border
+            Stroke="{StaticResource Gray500}"
+            StrokeShape="RoundRectangle 20"
+            StrokeThickness="0">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ZWLTapped" />
+            </Border.GestureRecognizers>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                    Grid.Column="0"
+                    HeightRequest="60"
+                    StrokeShape="RoundRectangle 50"
+                    StrokeThickness="0"
+                    WidthRequest="60">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="120"
+                        Source="person_receive.jpg"
+                        WidthRequest="120" />
+                </Border>
+
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="Body"
+                    Text="ZWL - Zimbabwean Dollar"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+
+        <Border
+            Stroke="{StaticResource Gray500}"
+            StrokeShape="RoundRectangle 20"
+            StrokeThickness="0">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="USDTapped" />
+            </Border.GestureRecognizers>
+
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                    Grid.Column="0"
+                    HeightRequest="60"
+                    StrokeShape="RoundRectangle 50"
+                    StrokeThickness="0"
+                    WidthRequest="60">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="120"
+                        Source="person_receive.jpg"
+                        WidthRequest="120" />
+                </Border>
+
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="Body"
+                    Text="USD - United States Dollars"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Border>
+        <BoxView x:Name="DividerReference" />
+    </VerticalStackLayout>
+</the49:BottomSheet>

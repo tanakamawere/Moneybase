@@ -18,11 +18,17 @@
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
         </Tab>
-        <Tab Title="Statistics">
+        <Tab Title="Wallet">
             <Tab.Icon>
-                <FontImageSource FontFamily="fasolid" Glyph="{x:Static helpers:FontAwesome.ChartBar}" />
+                <FontImageSource FontFamily="fasolid" Glyph="{x:Static helpers:FontAwesome.Wallet}" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate pages:StatisticsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate pages:WalletPage}" />
+        </Tab>
+        <Tab Title="You">
+            <Tab.Icon>
+                <FontImageSource FontFamily="fasolid" Glyph="{x:Static helpers:FontAwesome.User}" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />
         </Tab>
     </TabBar>
 

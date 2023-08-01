@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.SendMoneyPages.SendMoneyPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    Title="SendMoneyPage"
+    x:DataType="vm:SendMoneyViewModel"
+    Shell.TabBarIsVisible="False">
+    <VerticalStackLayout Margin="20" Spacing="20">
+        <Picker
+            ItemDisplayBinding="{Binding .}"
+            ItemsSource="{Binding TransactionProviders}"
+            SelectedItem="{Binding Provider}" />
+
+        <Picker
+            IsVisible="{Binding BanksVisible}"
+            ItemDisplayBinding="{Binding .}"
+            ItemsSource="{Binding Banks}"
+            SelectedItem="{Binding Bank}" />
+
+        <Entry
+            Keyboard="Numeric"
+            Placeholder="Receipient Account Number"
+            Text="{Binding RecAccNum}" />
+
+        <Entry
+            Keyboard="Telephone"
+            Placeholder="Receipient Phone Number"
+            Text="{Binding RecPhoneNum}" />
+
+        <Entry
+            Keyboard="Numeric"
+            Placeholder="Amount"
+            Text="{Binding Amount}" />
+
+        <Button
+            Command="{Binding SubmitTransactionCommand}"
+            HorizontalOptions="Center"
+            Text="Submit"
+            VerticalOptions="End" />
+    </VerticalStackLayout>
+</ContentPage>

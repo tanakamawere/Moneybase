@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet
+    x:Class="Moneybase.Pages.ReceiveMoneySheet"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+    xmlns:the49="https://schemas.the49.com/dotnet/2023/maui">
+    <the49:BottomSheet.Detents>
+        <!--  Stop at the height of the screen  -->
+        <the49:FullscreenDetent />
+        <!--  Stop at the height of the page content  -->
+        <the49:ContentDetent />
+        <!--  Stop at 120dp  -->
+        <the49:HeightDetent Height="120" />
+        <!--  Stop at 45% of the screen height  -->
+        <the49:RatioDetent Ratio="0.45" />
+        <!--  Stop at the height of the divider view  -->
+        <the49:AnchorDetent Anchor="{x:Reference divider}" />
+    </the49:BottomSheet.Detents>
+    <VerticalStackLayout Spacing="16">
+        <VerticalStackLayout>
+            <!--  some content  -->
+        </VerticalStackLayout>
+        <BoxView x:Name="divider" />
+
+        <cv:BarcodeImage
+            Barcode="Hie there"
+            BarcodeBackground="White"
+            BarcodeFormat="QR_CODE"
+            BarcodeHeight="400"
+            BarcodeMargin="5"
+            BarcodeWidth="400"
+            HeightRequest="400"
+            WidthRequest="400" />
+
+    </VerticalStackLayout>
+</the49:BottomSheet>
