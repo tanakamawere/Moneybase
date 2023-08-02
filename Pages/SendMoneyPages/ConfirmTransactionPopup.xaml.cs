@@ -1,3 +1,4 @@
+using Moneybase.Services;
 using MoneybaseLibrary.Models;
 using Mopups.Services;
 
@@ -5,16 +6,26 @@ namespace Moneybase.Pages.SendMoneyPages;
 
 public partial class ConfirmTransactionPopup
 {
-	public Transaction something;
-	public ConfirmTransactionPopup(Transaction transaction)
+	private readonly Transaction transaction;
+	private readonly IApiRepository repository;
+	public ConfirmTransactionPopup(Transaction trans, IApiRepository repo)
 	{
 		InitializeComponent();
+		transaction = trans;
+		repository = repo;
 
-		MyLabel.Text = transaction.RecipientAccNum;
+        transactionProvider.Text = $"Transaction Type: {transaction.TransactionProviders}";
+        recPhoneNum.Text = $"To: {transaction.RecipientPhoneNum}";
+		amount.Text = $"{transaction.Currency}$ {transaction.Amount}";
 	}
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private void Cancel(object sender, EventArgs e)
     {
 		MopupService.Instance.PopAsync();
     }
+
+	private async void SendTransaction(object sender, EventArgs e)
+	{
+		await repository.PostTransaction(transaction);
+	}
 }

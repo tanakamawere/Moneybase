@@ -11,18 +11,33 @@
         Padding="20"
         BackgroundColor="{AppThemeBinding Light={StaticResource GrayBackground},
                                           Dark={StaticResource Gray900}}"
-        HeightRequest="400"
-        StrokeShape="RoundRectangle 20"
-        StrokeThickness="2">
+        HeightRequest="300"
+        StrokeShape="RoundRectangle 20">
         <VerticalStackLayout Spacing="10">
 
             <Label
-                x:Name="MyLabel"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="Confirm Transaction"
+                VerticalOptions="Center" />
+
+            <Label
+                x:Name="transactionProvider"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 
-            <Button Text="No, wait" Clicked="Button_Clicked"/>
-            <Button Text="Confirm" />
+            <Label
+                x:Name="recPhoneNum"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Label
+                x:Name="amount"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Button Clicked="Cancel" Text="No, wait" />
+            <Button Clicked="SendTransaction" Text="Confirm" />
         </VerticalStackLayout>
     </Border>
 </mopups:PopupPage>

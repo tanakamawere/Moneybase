@@ -4,32 +4,68 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:Moneybase.ViewModels"
-    Title="SendMoneyPage"
+    Title="{Binding Title}"
     x:DataType="vm:SendMoneyViewModel"
     Shell.TabBarIsVisible="False">
     <VerticalStackLayout Margin="20" Spacing="20">
+
+        <Border IsVisible="{Binding MoneyBaseUserPreview}">
+            <Grid Margin="10" ColumnSpacing="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
+                                                      Dark={StaticResource Gray900}}"
+                    HeightRequest="60"
+                    Source="male_avatar.svg"
+                    WidthRequest="60" />
+
+
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Spacing="2"
+                    VerticalOptions="Center">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        Text="User Name" />
+                    <Label Text="User Phone" />
+                    <Label Text="Email Address" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
         <Picker
+            FontSize="Large"
             ItemDisplayBinding="{Binding .}"
             ItemsSource="{Binding TransactionProviders}"
             SelectedItem="{Binding Provider}" />
 
         <Picker
+            FontSize="Large"
             IsVisible="{Binding BanksVisible}"
             ItemDisplayBinding="{Binding .}"
             ItemsSource="{Binding Banks}"
             SelectedItem="{Binding Bank}" />
 
         <Entry
+            FontSize="Large"
+            IsVisible="{Binding AccountEntryVisible}"
             Keyboard="Numeric"
             Placeholder="Receipient Account Number"
             Text="{Binding RecAccNum}" />
 
         <Entry
+            FontSize="Large"
             Keyboard="Telephone"
             Placeholder="Receipient Phone Number"
             Text="{Binding RecPhoneNum}" />
 
         <Entry
+            FontSize="Large"
             Keyboard="Numeric"
             Placeholder="Amount"
             Text="{Binding Amount}" />
@@ -37,7 +73,7 @@
         <Button
             Command="{Binding SubmitTransactionCommand}"
             HorizontalOptions="Center"
-            Text="Submit"
+            Text="Send"
             VerticalOptions="End" />
     </VerticalStackLayout>
 </ContentPage>

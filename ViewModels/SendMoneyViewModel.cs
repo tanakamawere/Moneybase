@@ -26,6 +26,11 @@ public partial class SendMoneyViewModel : ViewModelBase
     [ObservableProperty]
     private bool banksVisible = false;
     [ObservableProperty]
+    private bool accountEntryVisible = false;
+    [ObservableProperty]
+    private bool moneyBaseUserPreview = false;
+
+    [ObservableProperty]
     private string recAccNum;
     [ObservableProperty]
     private string recPhoneNum;
@@ -39,17 +44,43 @@ public partial class SendMoneyViewModel : ViewModelBase
     {
         repository = repo;
         this.popups = popups;
+        Title = $"Send {CurrencyToSend}";
+
         transactionProviders = Enum.GetValues(typeof(TransactionProvider)).Cast<TransactionProvider>();
         banks = Enum.GetValues(typeof(Banks)).Cast<Banks>();
+    }
 
+    partial void OnRecPhoneNumChanged(string oldValue, string newValue)
+    {
+        if (Provider.Equals(TransactionProvider.MoneybaseTransfer))
+        {
+            //logic to get the user from the api
+        }
     }
 
     partial void OnProviderChanged(TransactionProvider oldValue, TransactionProvider newValue)
     {
-        if (newValue.Equals(TransactionProvider.Zipit))
-            BanksVisible = true;
-        else
-            BanksVisible = false;
+        switch (newValue)
+        {
+            case TransactionProvider.MoneybaseTransfer:
+                AccountEntryVisible = false;
+                BanksVisible = false;
+                break;
+            case TransactionProvider.Zipit:
+                AccountEntryVisible = true;
+                MoneyBaseUserPreview = false;
+                BanksVisible = true;
+                break;
+            case TransactionProvider.Ecocash:
+            case TransactionProvider.Unregistered:
+            case TransactionProvider.InnBucks:
+                AccountEntryVisible = false;
+                MoneyBaseUserPreview = false;
+                BanksVisible = false;
+                break;
+            default:
+                break;
+        }
     }
 
     [RelayCommand]
@@ -62,10 +93,12 @@ public partial class SendMoneyViewModel : ViewModelBase
             SenderAccNum = "Get This Somehow",
             TransactionProviders = Provider,
             Currency = (Currencies)Enum.Parse(typeof(Currencies), CurrencyToSend),
-            RecipientName = Bank.ToString(),
+            RecipientName = Provider.Equals(TransactionProvider.MoneybaseTransfer) ? "Self" : Bank.ToString(),
+            Amount = Amount,
+            RecipientAccNum = RecAccNum,
+            RecipientPhoneNum = RecPhoneNum,
         };
 
-        await popups.PushAsync(new ConfirmTransactionPopup(Transaction));
-        //await repository.PostTransaction(Transaction);
+        await popups.PushAsync(new ConfirmTransactionPopup(Transaction, repository));
     }
 }

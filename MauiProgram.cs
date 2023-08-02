@@ -39,7 +39,6 @@ public static class MauiProgram
 		builder.Services.AddTransient<IApiRepository, ApiRepository>();		builder.Services.AddTransient<SendCurrencyBottomSheet>();
 		builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
 
-
 		return builder.Build();
 	}
 }

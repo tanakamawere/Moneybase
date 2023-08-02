@@ -3,6 +3,7 @@
     x:Class="Moneybase.Pages.SendMoneyPages.SendCurrencyBottomSheet"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Moneybase.Helpers"
     xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
     BackgroundColor="{AppThemeBinding Light={StaticResource GrayBackground},
                                       Dark={StaticResource Gray600}}"
@@ -17,17 +18,17 @@
     </the49:BottomSheet.Detents>
 
 
-    <VerticalStackLayout Spacing="16">
+    <VerticalStackLayout Margin="20" Spacing="16">
         <Label
-            Margin="5"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="24"
             HorizontalOptions="CenterAndExpand"
-            Text="Choose the currency to send" />
+            Text="Choose Currency" />
 
         <BoxView x:Name="divider" />
 
         <Border
+            Padding="5,10"
             Stroke="{StaticResource Gray500}"
             StrokeShape="RoundRectangle 20"
             StrokeThickness="0">
@@ -40,18 +41,21 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border
-                    Grid.Column="0"
-                    HeightRequest="60"
-                    StrokeShape="RoundRectangle 50"
-                    StrokeThickness="0"
-                    WidthRequest="60">
-                    <Image
-                        Aspect="AspectFit"
-                        HeightRequest="120"
-                        Source="person_receive.jpg"
-                        WidthRequest="120" />
-                </Border>
+
+                <Image
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
+                                                      Dark={StaticResource Gray900}}"
+                    HeightRequest="20"
+                    WidthRequest="20">
+                    <Image.Source>
+                        <FontImageSource
+                            FontFamily="fasolid"
+                            Glyph="{x:Static helpers:FontAwesome.ArrowsToCircle}"
+                            Size="20"
+                            Color="{AppThemeBinding Light={StaticResource Primary},
+                                                    Dark={StaticResource White}}" />
+                    </Image.Source>
+                </Image>
 
                 <Label
                     Grid.Column="1"
@@ -64,6 +68,7 @@
 
 
         <Border
+            Padding="5,10"
             Stroke="{StaticResource Gray500}"
             StrokeShape="RoundRectangle 20"
             StrokeThickness="0">
@@ -77,18 +82,21 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border
-                    Grid.Column="0"
-                    HeightRequest="60"
-                    StrokeShape="RoundRectangle 50"
-                    StrokeThickness="0"
-                    WidthRequest="60">
-                    <Image
-                        Aspect="AspectFit"
-                        HeightRequest="120"
-                        Source="person_receive.jpg"
-                        WidthRequest="120" />
-                </Border>
+
+                <Image
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
+                                                      Dark={StaticResource Gray900}}"
+                    HeightRequest="20"
+                    WidthRequest="20">
+                    <Image.Source>
+                        <FontImageSource
+                            FontFamily="fasolid"
+                            Glyph="{x:Static helpers:FontAwesome.DollarSign}"
+                            Size="20"
+                            Color="{AppThemeBinding Light={StaticResource Primary},
+                                                    Dark={StaticResource White}}" />
+                    </Image.Source>
+                </Image>
 
                 <Label
                     Grid.Column="1"
