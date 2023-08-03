@@ -7,8 +7,8 @@ public class ApiRepository : IApiRepository
 {
     private static readonly HttpClient _httpClient = new HttpClient()
     {
-        //BaseAddress = new Uri("http://10.0.2.2:5052/")
-        BaseAddress = new Uri("https://f8d6-77-246-52-37.ngrok-free.app/")
+        BaseAddress = new Uri("http://10.0.2.2:5052/")
+        //BaseAddress = new Uri("https://4223-77-246-52-168.ngrok-free.app/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()
@@ -56,18 +56,30 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<FirstTimeUser>($"/users/user_is_new/{authId}");
     }
 
-    public async Task CreateCard(string userId)
+    public async Task<bool> CreateCard(string userId)
     {
-        await _httpClient.PostAsJsonAsync($"/virtualcards/createcard/{userId}", userId);
+        var response = await _httpClient.PostAsJsonAsync($"/virtualcards/createcard/{userId}", userId); 
+        if (response.IsSuccessStatusCode)
+            return true;
+        else
+            return false;
     }
 
-    public async Task ChangeCardBlockStatus(int cardId)
+    public async Task<bool> ChangeCardBlockStatus(int cardId)
     {
-        await _httpClient.PostAsJsonAsync($"/virtualcards/changeblock/{cardId}", cardId);
+        var response = await _httpClient.PostAsJsonAsync($"/virtualcards/changeblock/{cardId}", cardId);
+        if (response.IsSuccessStatusCode)
+            return true;
+        else
+            return false;
     }
-    public async Task DeleteCard(int cardId)
+    public async Task<bool> DeleteCard(int cardId)
     {
-        await _httpClient.DeleteAsync($"/virtualcards/deletecard/{cardId}");
+        var response = await _httpClient.DeleteAsync($"/virtualcards/deletecard/{cardId}");
+        if (response.IsSuccessStatusCode)
+            return true;
+        else
+            return false;
     }
 
     public async Task<IEnumerable<VirtualCard>> GetVirtualCards(string userId)
@@ -75,14 +87,22 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<IEnumerable<VirtualCard>>($"/virtualcards/getcards/{userId}");
     }
 
-    public async Task CreateSavingsAccount(Account account, string userId)
+    public async Task<bool> CreateSavingsAccount(Account account, string userId)
     {
-        await _httpClient.PostAsJsonAsync($"/savings/create/{account}/{userId}", account);
+        var response = await _httpClient.PostAsJsonAsync($"/savings/create/{account}/{userId}", account);
+        if (response.IsSuccessStatusCode)
+            return true;
+        else
+            return false;
     }
 
-    public async Task DeleteSavingsAccount(int accountId)
+    public async Task<bool> DeleteSavingsAccount(int accountId)
     {
-        await _httpClient.DeleteAsync($"/savings/delete/{accountId}");
+        var response = await _httpClient.DeleteAsync($"/savings/delete/{accountId}");
+        if (response.IsSuccessStatusCode)
+            return true;
+        else
+            return false;
     }
 
     public async Task<IEnumerable<Account>> GetSavingsAccounts(string userId)
@@ -95,9 +115,12 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<Account>($"/savings/get_single/{accountId}");
     }
 
-    public async Task TransactSavingsAccount(Transaction transaction)
+    public async Task<bool> TransactSavingsAccount(Transaction transaction)
     {
-        await _httpClient.PostAsJsonAsync($"/savings/transact/{transaction}", transaction);
+        var response = await _httpClient.PostAsJsonAsync($"/savings/transact/{transaction}", transaction);
+        if (response.IsSuccessStatusCode)
+            return true;
+        else
+            return false;
     }
-
 }

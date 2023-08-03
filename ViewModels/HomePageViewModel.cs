@@ -28,7 +28,7 @@ public partial class HomePageViewModel : ViewModelBase
     public HomePageViewModel(IApiRepository repo)
     {
         repository = repo;
-        GetUser();
+        //GetUser();
     }
 
     async void GetUser()

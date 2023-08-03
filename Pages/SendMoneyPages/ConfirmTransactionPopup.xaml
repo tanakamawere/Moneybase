@@ -4,8 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-    Title="ConfirmTransactionPopup"
-    BackgroundColor="{StaticResource Gray500}"
+    BackgroundColor="#80000000"
     CloseWhenBackgroundIsClicked="False">
     <Border
         Padding="20"

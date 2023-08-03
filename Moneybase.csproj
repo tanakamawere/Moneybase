@@ -59,9 +59,11 @@
 	  <None Remove="Resources\Fonts\fasolid.otf" />
 	  <None Remove="Resources\Images\applandingpic.jpg" />
 	  <None Remove="Resources\Images\card_background.jpg" />
+	  <None Remove="Resources\Images\credit_cards.svg" />
 	  <None Remove="Resources\Images\dstv_logo.jpeg" />
 	  <None Remove="Resources\Images\ecocash.png" />
 	  <None Remove="Resources\Images\innbucks.png" />
+	  <None Remove="Resources\Images\loading_pic.svg" />
 	  <None Remove="Resources\Images\male_avatar.svg" />
 	  <None Remove="Resources\Images\ok_logo.png" />
 	  <None Remove="Resources\Images\person_receive.jpg" />
@@ -113,6 +115,9 @@
 	  <MauiXaml Update="Pages\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\LoadingPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\ProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -137,10 +142,21 @@
 	  <MauiXaml Update="Pages\WalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Pages\WalletPages\" />
+	  <MauiXaml Update="Pages\WalletPages\CreateSavingsAccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\WalletPages\RequestCardPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\WalletPages\VirtualCardOptionsBottomSheet.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Templates\DefaultPopupTemplate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Templates\OptionCardTemplate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

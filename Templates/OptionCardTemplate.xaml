@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Moneybase.Templates.OptionCardTemplate"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Border
+        Padding="5,10"
+        Stroke="{StaticResource Gray500}"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="0">
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <Image
+                BackgroundColor="{AppThemeBinding Light={StaticResource White},
+                                                  Dark={StaticResource Gray900}}"
+                HeightRequest="20"
+                WidthRequest="20">
+                <Image.Source>
+                    <FontImageSource
+                        x:Name="IconImage"
+                        FontFamily="fasolid"
+                        Size="20"
+                        Color="{AppThemeBinding Light={StaticResource Primary},
+                                                Dark={StaticResource White}}" />
+                </Image.Source>
+            </Image>
+
+            <Label
+                x:Name="TitleLabel"
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="Body"
+                VerticalOptions="Center" />
+        </Grid>
+    </Border>
+</ContentView>

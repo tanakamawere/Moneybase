@@ -1,5 +1,6 @@
 ﻿using Moneybase.Pages;
 using Moneybase.Pages.SendMoneyPages;
+using Moneybase.Pages.WalletPages;
 
 namespace Moneybase.Services;
 
@@ -18,6 +19,7 @@ public static class PagesExtensions
         builder.Services.AddTransient<RemotePayPage>();
         builder.Services.AddTransient<SendMoneyPage>();
         builder.Services.AddTransient<SignUpPage>();
+        builder.Services.AddTransient<CreateSavingsAccountPage>();
 
         return builder;
     }

@@ -17,13 +17,13 @@ public interface IApiRepository
     Task PostTransaction(Transaction transaction);
 
     Task<IEnumerable<VirtualCard>> GetVirtualCards(string userId);
-    Task ChangeCardBlockStatus(int cardId);
-    Task CreateCard(string userId);
-    Task DeleteCard(int cardId);
+    Task<bool> ChangeCardBlockStatus(int cardId);
+    Task<bool> CreateCard(string userId);
+    Task<bool> DeleteCard(int cardId);
 
-    Task CreateSavingsAccount(Account account, string userId);
-    Task DeleteSavingsAccount(int accountId);
+    Task<bool> CreateSavingsAccount(Account account, string userId);
+    Task<bool> DeleteSavingsAccount(int accountId);
     Task<IEnumerable<Account>> GetSavingsAccounts(string userId);
     Task<Account> GetSavingsAccount (int accountId);
-    Task TransactSavingsAccount(Transaction transaction);
+    Task<bool> TransactSavingsAccount(Transaction transaction);
 }

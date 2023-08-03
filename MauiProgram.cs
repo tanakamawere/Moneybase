@@ -1,6 +1,5 @@
 ﻿using Camera.MAUI;
 using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
 using Moneybase.Pages.SendMoneyPages;
 using Moneybase.Services;
@@ -38,7 +37,7 @@ public static class MauiProgram
 #endif
 		builder.Services.AddTransient<IApiRepository, ApiRepository>();		
 		builder.Services.AddTransient<SendCurrencyBottomSheet>();
-		builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
+		builder.Services.AddSingleton(MopupService.Instance);
 
 		return builder.Build();
 	}

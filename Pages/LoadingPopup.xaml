@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopups:PopupPage
+    x:Class="Moneybase.Pages.LoadingPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+    BackgroundColor="#800171DF">
+
+    <Border
+        Padding="20"
+        HeightRequest="300"
+        WidthRequest="300">
+        <Grid>
+            <Image
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Source="loading_pic.svg"
+                VerticalOptions="Start" />
+            <Label
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Please wait..."
+                VerticalOptions="Center" />
+            <ActivityIndicator
+                IsEnabled="True"
+                IsRunning="True"
+                IsVisible="True"
+                VerticalOptions="End" />
+        </Grid>
+    </Border>
+
+</mopups:PopupPage>

@@ -29,6 +29,8 @@ public partial class SendMoneyViewModel : ViewModelBase
     private bool accountEntryVisible = false;
     [ObservableProperty]
     private bool moneyBaseUserPreview = false;
+    [ObservableProperty]
+    private string previewImage = "visa_svg.png";
 
     [ObservableProperty]
     private string recAccNum;
@@ -36,9 +38,6 @@ public partial class SendMoneyViewModel : ViewModelBase
     private string recPhoneNum;
     [ObservableProperty]
     private decimal amount;
-
-    private readonly IApiRepository repository;
-    private readonly IPopupNavigation popups;
 
     public SendMoneyViewModel(IApiRepository repo, IPopupNavigation popups)
     {
@@ -64,18 +63,31 @@ public partial class SendMoneyViewModel : ViewModelBase
         {
             case TransactionProvider.MoneybaseTransfer:
                 AccountEntryVisible = false;
+                PreviewImage = "visa_svg.png";
                 BanksVisible = false;
                 break;
             case TransactionProvider.Zipit:
                 AccountEntryVisible = true;
                 MoneyBaseUserPreview = false;
                 BanksVisible = true;
+                PreviewImage = "zipit.png";
                 break;
             case TransactionProvider.Ecocash:
+                AccountEntryVisible = false;
+                MoneyBaseUserPreview = false;
+                PreviewImage = "ecocash.png";
+                BanksVisible = false;
+                break;
             case TransactionProvider.Unregistered:
+                AccountEntryVisible = false;
+                MoneyBaseUserPreview = false;
+                PreviewImage = "zipit.png";
+                BanksVisible = false;
+                break;
             case TransactionProvider.InnBucks:
                 AccountEntryVisible = false;
                 MoneyBaseUserPreview = false;
+                PreviewImage = "innbucks.png";
                 BanksVisible = false;
                 break;
             default:

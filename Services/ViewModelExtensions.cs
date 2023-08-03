@@ -18,6 +18,7 @@ public static class ViewModelExtensions
         builder.Services.AddSingleton<RemotePayViewModel>();
 
         builder.Services.AddTransient<SendMoneyViewModel>();
+        builder.Services.AddTransient<CreateSavingsViewModel>();
 
         return builder;
     }

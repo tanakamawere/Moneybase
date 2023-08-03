@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.WalletPages.CreateSavingsAccountPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    Title="Create Savings Account"
+    x:DataType="vm:CreateSavingsViewModel"
+    Shell.TabBarIsVisible="False">
+    <VerticalStackLayout>
+        <Border BackgroundColor="{Binding SelectedColour}" HeightRequest="300">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
+
+            <Grid Padding="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="28"
+                        Text="Goals and Savings" />
+                    <Label Text="Create a goal to save towards a special day or make a general savings account. Whatever you like!" />
+                    <Label
+                        Margin="0,20,0,0"
+                        FontSize="Caption"
+                        Text="Use the colour picker to customise your account" />
+                    <CollectionView
+                        ItemsLayout="HorizontalList"
+                        ItemsSource="{Binding Colours}"
+                        SelectedItem="{Binding SelectedColour}"
+                        SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    BackgroundColor="{Binding .}"
+                                    Stroke="White"
+                                    StrokeThickness="2"
+                                    Style="{StaticResource SavingsIconBackground}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <Image
+                    Grid.Column="1"
+                    HeightRequest="100"
+                    Source="credit_cards.svg" />
+            </Grid>
+        </Border>
+
+        <VerticalStackLayout Margin="20" Spacing="20">
+            <Entry Placeholder="Name e.g General Savings, Dad's birthday, Roora" />
+            <Picker
+                ItemDisplayBinding="{Binding .}"
+                ItemsSource="{Binding CurrenciesList}"
+                SelectedItem="{Binding CurrencySelected}" />
+            <DatePicker />
+
+            <Button Command="{Binding CreateAccountCommand}" Text="Create" />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopups:PopupPage
+    x:Class="Moneybase.Pages.WalletPages.RequestCardPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+    BackgroundColor="#80000000"
+    CloseWhenBackgroundIsClicked="False">
+
+    <Border
+        Padding="20"
+        HeightRequest="300"
+        WidthRequest="300">
+        <Grid>
+            <Image
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Source="credit_cards.svg"
+                VerticalOptions="Start" />
+            <Label
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Do you want to request for a Virtual Credit Card?"
+                VerticalOptions="Center" />
+            <VerticalStackLayout Spacing="5" VerticalOptions="End">
+                <Button
+                    Clicked="Dismiss"
+                    Style="{StaticResource TransparentButton}"
+                    Text="Cancel" />
+                <Button Clicked="CreateCard" Text="Yes please" />
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+
+</mopups:PopupPage>

@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:templates="clr-namespace:Moneybase.Templates"
     xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
     BackgroundColor="{AppThemeBinding Light={StaticResource GrayBackground},
                                       Dark={StaticResource Gray600}}"
@@ -27,122 +28,9 @@
 
         <BoxView x:Name="divider" />
 
-        <!--  Buy Airtime  -->
-        <Border
-            Padding="5,10"
-            Stroke="{StaticResource Gray500}"
-            StrokeShape="RoundRectangle 20"
-            StrokeThickness="0">
-
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-
-                <Image
-                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
-                                                      Dark={StaticResource Gray900}}"
-                    HeightRequest="20"
-                    WidthRequest="20">
-                    <Image.Source>
-                        <FontImageSource
-                            FontFamily="fasolid"
-                            Glyph="{x:Static helpers:FontAwesome.Mobile}"
-                            Size="20"
-                            Color="{AppThemeBinding Light={StaticResource Primary},
-                                                    Dark={StaticResource White}}" />
-                    </Image.Source>
-                </Image>
-
-                <Label
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="Body"
-                    Text="Buy Airtime"
-                    VerticalOptions="Center" />
-            </Grid>
-        </Border>
-
-        <!--  Zesa  -->
-        <Border
-            Padding="5,10"
-            Stroke="{StaticResource Gray500}"
-            StrokeShape="RoundRectangle 20"
-            StrokeThickness="0">
-
-
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-
-                <Image
-                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
-                                                      Dark={StaticResource Gray900}}"
-                    HeightRequest="20"
-                    WidthRequest="20">
-                    <Image.Source>
-                        <FontImageSource
-                            FontFamily="fasolid"
-                            Glyph="{x:Static helpers:FontAwesome.BoltLightning}"
-                            Size="20"
-                            Color="{AppThemeBinding Light={StaticResource Primary},
-                                                    Dark={StaticResource White}}" />
-                    </Image.Source>
-                </Image>
-
-                <Label
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="Body"
-                    Text="ZESA"
-                    VerticalOptions="Center" />
-            </Grid>
-        </Border>
-
-        <!--  Scan QR Code  -->
-        <Border
-            Padding="5,10"
-            Stroke="{StaticResource Gray500}"
-            StrokeShape="RoundRectangle 20"
-            StrokeThickness="0">
-
-
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-
-                <Image
-                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
-                                                      Dark={StaticResource Gray900}}"
-                    HeightRequest="20"
-                    WidthRequest="20">
-                    <Image.Source>
-                        <FontImageSource
-                            FontFamily="fasolid"
-                            Glyph="{x:Static helpers:FontAwesome.Qrcode}"
-                            Size="20"
-                            Color="{AppThemeBinding Light={StaticResource Primary},
-                                                    Dark={StaticResource White}}" />
-                    </Image.Source>
-                </Image>
-
-                <Label
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="Body"
-                    Text="Scan QR Code"
-                    VerticalOptions="Center" />
-            </Grid>
-        </Border>
-
+        <templates:OptionCardTemplate Title="Buy Airtime" Icon="{x:Static helpers:FontAwesome.Mobile}" />
+        <templates:OptionCardTemplate Title="ZESA" Icon="{x:Static helpers:FontAwesome.BoltLightning}" />
+        <templates:OptionCardTemplate Title="Scan QR Code" Icon="{x:Static helpers:FontAwesome.Qrcode}" />
 
         <BoxView x:Name="DividerReference" />
     </VerticalStackLayout>

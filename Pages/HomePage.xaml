@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:Moneybase.Helpers"
     xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:templates="clr-namespace:Moneybase.Templates"
     xmlns:vm="clr-namespace:Moneybase.ViewModels"
     x:DataType="vm:HomePageViewModel"
     Shell.NavBarIsVisible="False">
@@ -76,6 +77,7 @@
                 </Image>
             </Border>
         </Grid>
+
 
         <!--  Accounts Bar  -->
         <Label

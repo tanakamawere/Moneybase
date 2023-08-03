@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <the49:BottomSheet
-    x:Class="Moneybase.Pages.SendMoneyPages.SendCurrencyBottomSheet"
+    x:Class="Moneybase.Pages.WalletPages.VirtualCardOptionsBottomSheet"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:Moneybase.Helpers"
@@ -24,22 +24,30 @@
             FontAttributes="Bold"
             FontSize="24"
             HorizontalOptions="CenterAndExpand"
-            Text="Choose Currency" />
+            Text="Card Options" />
 
         <BoxView x:Name="divider" />
 
-        <!--  ZWL Tapped  -->
-        <templates:OptionCardTemplate Title="ZWL - Zimbabwean Dollar" Icon="{x:Static helpers:FontAwesome.ArrowsToCircle}">
+        <!--  View CVV  -->
+        <templates:OptionCardTemplate Title="View CVV" Icon="{x:Static helpers:FontAwesome.Code}">
             <templates:OptionCardTemplate.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ZWLTapped" />
+                <TapGestureRecognizer Tapped="ViewCVV" />
             </templates:OptionCardTemplate.GestureRecognizers>
         </templates:OptionCardTemplate>
-        <!--  USD Tapped  -->
-        <templates:OptionCardTemplate Title="USD - United States Dollars" Icon="{x:Static helpers:FontAwesome.DollarSign}">
+
+        <templates:OptionCardTemplate Title="Block/Unblock Card" Icon="{x:Static helpers:FontAwesome.Stop}">
             <templates:OptionCardTemplate.GestureRecognizers>
-                <TapGestureRecognizer Tapped="USDTapped" />
+                <TapGestureRecognizer Tapped="BlockUnblockCard" />
             </templates:OptionCardTemplate.GestureRecognizers>
         </templates:OptionCardTemplate>
+
+        <templates:OptionCardTemplate Title="Delete Card" Icon="{x:Static helpers:FontAwesome.TrashCan}">
+            <templates:OptionCardTemplate.GestureRecognizers>
+                <TapGestureRecognizer Tapped="DeleteCard" />
+            </templates:OptionCardTemplate.GestureRecognizers>
+        </templates:OptionCardTemplate>
+
         <BoxView x:Name="DividerReference" />
     </VerticalStackLayout>
+
 </the49:BottomSheet>

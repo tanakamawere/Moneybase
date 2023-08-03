@@ -1,5 +1,6 @@
 ﻿using Moneybase.Pages;
 using Moneybase.Pages.SendMoneyPages;
+using Moneybase.Pages.WalletPages;
 
 namespace Moneybase;
 
@@ -19,5 +20,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(DirectPayPage), typeof(DirectPayPage));
         Routing.RegisterRoute(nameof(RemotePayPage), typeof(RemotePayPage));
         Routing.RegisterRoute(nameof(CashOutPage), typeof(CashOutPage));
+        Routing.RegisterRoute(nameof(CreateSavingsAccountPage), typeof(CreateSavingsAccountPage));
     }
 }

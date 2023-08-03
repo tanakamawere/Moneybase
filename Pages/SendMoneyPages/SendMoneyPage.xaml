@@ -7,8 +7,36 @@
     Title="{Binding Title}"
     x:DataType="vm:SendMoneyViewModel"
     Shell.TabBarIsVisible="False">
-    <VerticalStackLayout Margin="20" Spacing="20">
+    <VerticalStackLayout>
+        <Border BackgroundColor="LightBlue" HeightRequest="300">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
 
+            <Grid Padding="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="10"
+                    VerticalOptions="Center">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="28"
+                        Text="Send Money" />
+                    <Label Text="Send money easily to friends and family using the providers below!" />
+                    <Image MaximumWidthRequest="180" Source="{Binding PreviewImage}" />
+                </VerticalStackLayout>
+
+                <Image
+                    Grid.Column="1"
+                    HeightRequest="100"
+                    Source="credit_cards.svg" />
+            </Grid>
+        </Border>
         <Border IsVisible="{Binding MoneyBaseUserPreview}">
             <Grid Margin="10" ColumnSpacing="5">
                 <Grid.ColumnDefinitions>
@@ -38,42 +66,45 @@
             </Grid>
         </Border>
 
-        <Picker
-            FontSize="Large"
-            ItemDisplayBinding="{Binding .}"
-            ItemsSource="{Binding TransactionProviders}"
-            SelectedItem="{Binding Provider}" />
+        <VerticalStackLayout Margin="20" Spacing="20">
 
-        <Picker
-            FontSize="Large"
-            IsVisible="{Binding BanksVisible}"
-            ItemDisplayBinding="{Binding .}"
-            ItemsSource="{Binding Banks}"
-            SelectedItem="{Binding Bank}" />
+            <Picker
+                FontSize="Large"
+                ItemDisplayBinding="{Binding .}"
+                ItemsSource="{Binding TransactionProviders}"
+                SelectedItem="{Binding Provider}" />
 
-        <Entry
-            FontSize="Large"
-            IsVisible="{Binding AccountEntryVisible}"
-            Keyboard="Numeric"
-            Placeholder="Receipient Account Number"
-            Text="{Binding RecAccNum}" />
+            <Picker
+                FontSize="Large"
+                IsVisible="{Binding BanksVisible}"
+                ItemDisplayBinding="{Binding .}"
+                ItemsSource="{Binding Banks}"
+                SelectedItem="{Binding Bank}" />
 
-        <Entry
-            FontSize="Large"
-            Keyboard="Telephone"
-            Placeholder="Receipient Phone Number"
-            Text="{Binding RecPhoneNum}" />
+            <Entry
+                FontSize="Large"
+                IsVisible="{Binding AccountEntryVisible}"
+                Keyboard="Numeric"
+                Placeholder="Receipient Account Number"
+                Text="{Binding RecAccNum}" />
 
-        <Entry
-            FontSize="Large"
-            Keyboard="Numeric"
-            Placeholder="Amount"
-            Text="{Binding Amount}" />
+            <Entry
+                FontSize="Large"
+                Keyboard="Telephone"
+                Placeholder="Receipient Phone Number"
+                Text="{Binding RecPhoneNum}" />
 
-        <Button
-            Command="{Binding SubmitTransactionCommand}"
-            HorizontalOptions="Center"
-            Text="Send"
-            VerticalOptions="End" />
+            <Entry
+                FontSize="Large"
+                Keyboard="Numeric"
+                Placeholder="Amount"
+                Text="{Binding Amount}" />
+
+            <Button
+                Command="{Binding SubmitTransactionCommand}"
+                HorizontalOptions="Center"
+                Text="Send"
+                VerticalOptions="End" />
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
