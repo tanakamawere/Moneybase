@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Identity.Client;
 using Moneybase.MSALClient;
 using Moneybase.Pages;
+using Moneybase.Pages.DirectPayPages;
 using Moneybase.Pages.SendMoneyPages;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
@@ -17,34 +18,25 @@ public partial class HomePageViewModel : ViewModelBase
     [ObservableProperty]
     IEnumerable<Account> userAccounts;
 
-    private readonly IApiRepository repository;
 
-    private AuthenticationResult authenticationResult;
-    private PublicClientSingleton publicClientSingleton;
-
-    [ObservableProperty]
-    string[] accessTokenScopes = new string[] { "No scopes found in access token" };
     [ObservableProperty]
     string userName;
     [ObservableProperty]
     string email;
 
+
     public HomePageViewModel(IApiRepository repo)
     {
         repository = repo;
-
-        publicClientSingleton = new PublicClientSingleton();
-
-        //authenticationResult = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
-        //GetUser();
+        GetUser();
     }
 
     async void GetUser()
     {
         try
         {
-            User = await repository.GetUser(authenticationResult.UniqueId);
-            UserAccounts = await repository.GetAccountsAsync(authenticationResult.UniqueId);
+            User = await repository.GetUser(AuthenticationResult.UniqueId);
+            UserAccounts = User.Accounts.ToList();
         }
         catch (Exception ex)
         {
@@ -61,23 +53,17 @@ public partial class HomePageViewModel : ViewModelBase
         
     //}
 
-    [RelayCommand]
-    private async Task SignOut()
-    {
-        await publicClientSingleton.SignOutAsync().ContinueWith((t) =>
-        {
-            return Task.CompletedTask;
-        });
-
-        Application.Current.MainPage = new LandingShell();
-    }
-
-
     //Function Navigations
     [RelayCommand]
     private async Task NavigateTo(string page)
     {
         await Shell.Current.GoToAsync(page);
+    }
+    [RelayCommand]
+    private async Task DirectPayOptions()
+    {
+        var directPaySheet = new PayOptionsSheet();
+        await directPaySheet.ShowAsync();
     }
 
     [RelayCommand]

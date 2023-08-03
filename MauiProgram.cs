@@ -36,7 +36,8 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-		builder.Services.AddTransient<IApiRepository, ApiRepository>();		builder.Services.AddTransient<SendCurrencyBottomSheet>();
+		builder.Services.AddTransient<IApiRepository, ApiRepository>();		
+		builder.Services.AddTransient<SendCurrencyBottomSheet>();
 		builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
 
 		return builder.Build();

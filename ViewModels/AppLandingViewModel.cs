@@ -9,8 +9,8 @@ namespace Moneybase.ViewModels;
 
 public partial class AppLandingViewModel : ViewModelBase
 {
-    PublicClientSingleton publicClientSingleton;
-    private IApiRepository repository;
+    private readonly PublicClientSingleton publicClientSingleton;
+    private readonly IApiRepository repository;
     public AppLandingViewModel(IApiRepository repo)
     {
         publicClientSingleton = new PublicClientSingleton();

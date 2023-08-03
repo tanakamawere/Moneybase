@@ -4,65 +4,31 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    x:DataType="vm:WalletViewModel"
     Shell.NavBarIsVisible="False">
     <VerticalStackLayout Margin="20,10">
-        <!--  Top bar  -->
-        <Grid ColumnSpacing="5">
+
+        <!--  Cards bar  -->
+        <Grid Margin="0,0,0,10" ColumnSpacing="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
 
-            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="Default"
-                    Text="Your Wallet"
-                    TextColor="{StaticResource Gray300}" />
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="Body"
-                    Text="{Binding User.Name}"
-                    TextColor="{AppThemeBinding Light={StaticResource Gray600},
-                                                Dark={StaticResource White}}" />
-            </VerticalStackLayout>
-
-            <Border
-                Grid.Column="1"
-                HeightRequest="40"
-                StrokeShape="RoundRectangle 50"
-                StrokeThickness="0"
-                WidthRequest="40">
-                <Image
-                    BackgroundColor="White"
-                    HeightRequest="20"
-                    WidthRequest="20">
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="Large"
+                Text="Your Cards"
+                VerticalOptions="Center" />
+            <Border Grid.Column="1" Style="{StaticResource IconBorderBackground}">
+                <Image Style="{StaticResource IconImage}">
                     <Image.Source>
                         <FontImageSource
                             FontFamily="fasolid"
-                            Glyph="{x:Static helpers:FontAwesome.Bell}"
-                            Size="20"
-                            Color="{AppThemeBinding Light={StaticResource Primary},
-                                                    Dark={StaticResource White}}" />
-                    </Image.Source>
-                </Image>
-            </Border>
-
-            <Border
-                Grid.Column="2"
-                HeightRequest="40"
-                StrokeShape="RoundRectangle 50"
-                StrokeThickness="0"
-                WidthRequest="40">
-                <Image
-                    BackgroundColor="White"
-                    HeightRequest="20"
-                    WidthRequest="20">
-                    <Image.Source>
-                        <FontImageSource
-                            FontFamily="fasolid"
-                            Glyph="{x:Static helpers:FontAwesome.Phone}"
+                            Glyph="{x:Static helpers:FontAwesome.Plus}"
                             Size="20"
                             Color="{AppThemeBinding Light={StaticResource Primary},
                                                     Dark={StaticResource White}}" />
@@ -70,9 +36,170 @@
                 </Image>
             </Border>
         </Grid>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
+
+        <!--  Virtual Cards  -->
+        <CarouselView EmptyView="You don't have any cards" ItemsSource="{Binding UserCards}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:VirtualCard">
+
+                    <Grid>
+                        <Border BackgroundColor="Transparent" HeightRequest="200">
+                            <Image HeightRequest="300" Source="card_background.jpg" />
+                        </Border>
+
+                        <Grid Grid.Column="0" Padding="20">
+                            <!--  Top Left Info  -->
+                            <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="Start">
+                                <Label
+                                    FontSize="24"
+                                    HorizontalOptions="Center"
+                                    Text="Virtual Card"
+                                    TextColor="White" />
+                            </VerticalStackLayout>
+
+
+                            <!--  Visa Image  -->
+                            <Image
+                                Grid.Column="1"
+                                Aspect="AspectFit"
+                                HeightRequest="30"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                WidthRequest="30">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="fabrands"
+                                        Glyph="{x:Static helpers:FontAwesome.CcVisa}"
+                                        Size="20"
+                                        Color="{AppThemeBinding Light={StaticResource White},
+                                                                Dark={StaticResource White}}" />
+                                </Image.Source>
+                            </Image>
+
+
+                            <!--  Name And Card Number  -->
+                            <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="End">
+
+                                <Label
+                                    FontSize="Medium"
+                                    Text="{Binding User.Name}"
+                                    TextColor="White" />
+                                <Label
+                                    FontSize="Medium"
+                                    Text="{Binding ExpiryDate, StringFormat='{}{0:MM/yy}'}"
+                                    TextColor="White" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    Text="{Binding CardNumber}"
+                                    TextColor="White" />
+                            </VerticalStackLayout>
+
+                            <!--  Options Button  -->
+
+                            <Image
+                                HeightRequest="20"
+                                HorizontalOptions="End"
+                                VerticalOptions="End"
+                                WidthRequest="20">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="fasolid"
+                                        Glyph="{x:Static helpers:FontAwesome.EllipsisVertical}"
+                                        Size="20"
+                                        Color="{AppThemeBinding Light={StaticResource White},
+                                                                Dark={StaticResource White}}" />
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!--  Savings & Goals bar  -->
+        <Grid Margin="0,10" ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="Large"
+                Text="Savings and Goals"
+                VerticalOptions="Center" />
+            <Border Grid.Column="1" Style="{StaticResource IconBorderBackground}">
+                <Image Style="{StaticResource IconImage}">
+                    <Image.Source>
+                        <FontImageSource
+                            FontFamily="fasolid"
+                            Glyph="{x:Static helpers:FontAwesome.Plus}"
+                            Size="20"
+                            Color="{AppThemeBinding Light={StaticResource Primary},
+                                                    Dark={StaticResource White}}" />
+                    </Image.Source>
+                </Image>
+            </Border>
+        </Grid>
+
+        <!--  Savings and Goals Item Template  -->
+        <Border
+            BackgroundColor="LightPink"
+            HeightRequest="150"
+            WidthRequest="150">
+            <Grid Padding="10">
+                <Border
+                    HorizontalOptions="End"
+                    Style="{StaticResource SavingsIconBackground}"
+                    VerticalOptions="Start">
+                    <Image Style="{StaticResource IconImage}">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="fasolid"
+                                Glyph="{x:Static helpers:FontAwesome.Hands}"
+                                Size="20"
+                                Color="{AppThemeBinding Light={StaticResource Primary},
+                                                        Dark={StaticResource White}}" />
+                        </Image.Source>
+                    </Image>
+                </Border>
+
+                <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="End">
+                    <Label FontAttributes="Bold" Text="Dad's birthday" />
+                    <ProgressBar Progress="0.5" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+
+        <!--  Budget & Analytics bar  -->
+        <Grid Margin="0,10" ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="Large"
+                Text="Analytics and Budgets"
+                VerticalOptions="Center" />
+            <Border Grid.Column="1" Style="{StaticResource IconBorderBackground}">
+                <Image Style="{StaticResource IconImage}">
+                    <Image.Source>
+                        <FontImageSource
+                            FontFamily="fasolid"
+                            Glyph="{x:Static helpers:FontAwesome.Plus}"
+                            Size="20"
+                            Color="{AppThemeBinding Light={StaticResource Primary},
+                                                    Dark={StaticResource White}}" />
+                    </Image.Source>
+                </Image>
+            </Border>
+        </Grid>
+
     </VerticalStackLayout>
 </ContentPage>

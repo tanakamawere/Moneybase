@@ -11,6 +11,7 @@ public static class PagesExtensions
         builder.Services.AddSingleton<ProfilePage>();
         builder.Services.AddSingleton<WalletPage>();
 
+        builder.Services.AddTransient<AppLandingPage>();
         builder.Services.AddTransient<CashOutPage>();
         builder.Services.AddTransient<DirectPayPage>();
         builder.Services.AddTransient<GroupPayPage>();

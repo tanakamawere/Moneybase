@@ -58,7 +58,7 @@
 	  <None Remove="Resources\Fonts\faregular.otf" />
 	  <None Remove="Resources\Fonts\fasolid.otf" />
 	  <None Remove="Resources\Images\applandingpic.jpg" />
-	  <None Remove="Resources\Images\card_bg.jpg" />
+	  <None Remove="Resources\Images\card_background.jpg" />
 	  <None Remove="Resources\Images\dstv_logo.jpeg" />
 	  <None Remove="Resources\Images\ecocash.png" />
 	  <None Remove="Resources\Images\innbucks.png" />
@@ -98,6 +98,9 @@
 	  <MauiXaml Update="Pages\DirectPayPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\DirectPayPages\PayOptionsSheet.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\GroupPayPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -134,6 +137,10 @@
 	  <MauiXaml Update="Pages\WalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\WalletPages\" />
 	</ItemGroup>
 
 </Project>

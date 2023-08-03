@@ -82,7 +82,10 @@
             FontAttributes="Bold"
             FontSize="Large"
             Text="Your Accounts" />
-        <CarouselView EmptyView="There are no accounts" ItemsSource="{Binding UserAccounts}">
+        <CarouselView
+            EmptyView="There are no accounts"
+            IndicatorView="indicatorView"
+            ItemsSource="{Binding UserAccounts}">
             <CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="models:Account">
 
@@ -99,6 +102,11 @@
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
+        <IndicatorView
+            x:Name="indicatorView"
+            HorizontalOptions="Center"
+            IndicatorColor="LightGray"
+            SelectedIndicatorColor="DarkGray" />
 
         <!--  Functions Bar  -->
         <Label
@@ -291,7 +299,7 @@
                 WidthRequest="100">
 
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateToCommand}" CommandParameter="DirectPayPage" />
+                    <TapGestureRecognizer Command="{Binding DirectPayOptionsCommand}" />
                 </Border.GestureRecognizers>
                 <VerticalStackLayout
                     HorizontalOptions="Center"

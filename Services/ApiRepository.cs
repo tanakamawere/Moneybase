@@ -7,7 +7,8 @@ public class ApiRepository : IApiRepository
 {
     private static readonly HttpClient _httpClient = new HttpClient()
     {
-        BaseAddress = new Uri("http://10.0.2.2:5052/")
+        //BaseAddress = new Uri("http://10.0.2.2:5052/")
+        BaseAddress = new Uri("https://f8d6-77-246-52-37.ngrok-free.app/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()
@@ -54,4 +55,49 @@ public class ApiRepository : IApiRepository
     {
         return await _httpClient.GetFromJsonAsync<FirstTimeUser>($"/users/user_is_new/{authId}");
     }
+
+    public async Task CreateCard(string userId)
+    {
+        await _httpClient.PostAsJsonAsync($"/virtualcards/createcard/{userId}", userId);
+    }
+
+    public async Task ChangeCardBlockStatus(int cardId)
+    {
+        await _httpClient.PostAsJsonAsync($"/virtualcards/changeblock/{cardId}", cardId);
+    }
+    public async Task DeleteCard(int cardId)
+    {
+        await _httpClient.DeleteAsync($"/virtualcards/deletecard/{cardId}");
+    }
+
+    public async Task<IEnumerable<VirtualCard>> GetVirtualCards(string userId)
+    {
+        return await _httpClient.GetFromJsonAsync<IEnumerable<VirtualCard>>($"/virtualcards/getcards/{userId}");
+    }
+
+    public async Task CreateSavingsAccount(Account account, string userId)
+    {
+        await _httpClient.PostAsJsonAsync($"/savings/create/{account}/{userId}", account);
+    }
+
+    public async Task DeleteSavingsAccount(int accountId)
+    {
+        await _httpClient.DeleteAsync($"/savings/delete/{accountId}");
+    }
+
+    public async Task<IEnumerable<Account>> GetSavingsAccounts(string userId)
+    {
+        return await _httpClient.GetFromJsonAsync<IEnumerable<Account>>($"/savings/get_accounts/{userId}");
+    }
+
+    public async Task<Account> GetSavingsAccount(int accountId)
+    {
+        return await _httpClient.GetFromJsonAsync<Account>($"/savings/get_single/{accountId}");
+    }
+
+    public async Task TransactSavingsAccount(Transaction transaction)
+    {
+        await _httpClient.PostAsJsonAsync($"/savings/transact/{transaction}", transaction);
+    }
+
 }
