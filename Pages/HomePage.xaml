@@ -95,8 +95,9 @@
                         BackgroundColor="AliceBlue"
                         StrokeShape="RoundRectangle 20"
                         StrokeThickness="0">
-                        <VerticalStackLayout Margin="30">
+                        <VerticalStackLayout Margin="20">
                             <Label FontSize="Default" Text="{Binding AccountType}" />
+                            <Label FontSize="Default" Text="{Binding Currency}" />
                             <Label FontSize="30" Text="{Binding Balance}" />
                             <Label FontSize="Title" Text="{Binding AccountNumber}" />
                         </VerticalStackLayout>

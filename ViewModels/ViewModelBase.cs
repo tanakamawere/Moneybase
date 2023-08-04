@@ -24,7 +24,7 @@ public partial class ViewModelBase : ObservableObject
     public ViewModelBase()
     { 
         publicClientSingleton = new PublicClientSingleton();
-        //authenticationResult = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
+        authenticationResult = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
     }
 
     [RelayCommand]

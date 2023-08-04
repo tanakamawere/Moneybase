@@ -34,7 +34,7 @@
                 <Image
                     Grid.Column="1"
                     HeightRequest="100"
-                    Source="credit_cards.svg" />
+                    Source="send_money.svg" />
             </Grid>
         </Border>
         <Border IsVisible="{Binding MoneyBaseUserPreview}">

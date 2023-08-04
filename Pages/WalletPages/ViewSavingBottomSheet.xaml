@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet
+    x:Class="Moneybase.Pages.WalletPages.ViewSavingBottomSheet"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:templates="clr-namespace:Moneybase.Templates"
+    xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+    BackgroundColor="{AppThemeBinding Light={StaticResource GrayBackground},
+                                      Dark={StaticResource Gray600}}"
+    HandleColor="{AppThemeBinding Light={StaticResource Primary},
+                                  Dark={StaticResource White}}"
+    HasBackdrop="True"
+    HasHandle="True">
+
+    <the49:BottomSheet.Detents>
+        <!--  Stop at the height of the divider view  -->
+    </the49:BottomSheet.Detents>
+
+
+
+    <VerticalStackLayout Spacing="16">
+        <Border x:Name="mainBorder" HeightRequest="260">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout>
+                <Grid Padding="20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="5"
+                        VerticalOptions="Center">
+                        <Label FontSize="14">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span x:Name="accountSavingsType" />
+                                    <Span Text=" - " />
+                                    <Span x:Name="accountGoalDueDate" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label
+                            x:Name="accountTitle"
+                            FontAttributes="Bold"
+                            FontSize="32" />
+
+                        <Label FontSize="28">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span x:Name="accountCurrency" />
+                                    <Span x:Name="accountBalance" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                    </VerticalStackLayout>
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="100"
+                        Source="save.svg" />
+                </Grid>
+                <ProgressBar
+                    x:Name="goalProgress"
+                    Margin="20,0"
+                    IsVisible="False" />
+                <Label
+                    x:Name="accountNumber"
+                    Margin="20"
+                    FontSize="14" />
+                <Label
+                    x:Name="accountGoalBalance"
+                    Margin="20"
+                    FontSize="14"
+                    IsVisible="False" />
+                <Label
+                    x:Name="accountDateCreated"
+                    Margin="20"
+                    FontSize="14" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!--  Deposit Account  -->
+        <templates:OptionCardTemplate Title="Deposit" Icon="{x:Static helpers:FontAwesome.CircleDown}">
+            <templates:OptionCardTemplate.GestureRecognizers>
+                <TapGestureRecognizer Tapped="DepositTapped" />
+            </templates:OptionCardTemplate.GestureRecognizers>
+        </templates:OptionCardTemplate>
+
+        <!--  Withdraw  -->
+        <templates:OptionCardTemplate Title="Withdraw" Icon="{x:Static helpers:FontAwesome.MoneyBillTransfer}">
+            <templates:OptionCardTemplate.GestureRecognizers>
+                <TapGestureRecognizer Tapped="WithdrawTapped" />
+            </templates:OptionCardTemplate.GestureRecognizers>
+        </templates:OptionCardTemplate>
+
+        <templates:OptionCardTemplate Title="Delete Account" Icon="{x:Static helpers:FontAwesome.TrashCan}">
+            <templates:OptionCardTemplate.GestureRecognizers>
+                <TapGestureRecognizer Tapped="DeleteTapped" />
+            </templates:OptionCardTemplate.GestureRecognizers>
+        </templates:OptionCardTemplate>
+        <BoxView x:Name="DividerReference" />
+
+    </VerticalStackLayout>
+
+</the49:BottomSheet>

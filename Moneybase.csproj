@@ -68,6 +68,8 @@
 	  <None Remove="Resources\Images\ok_logo.png" />
 	  <None Remove="Resources\Images\person_receive.jpg" />
 	  <None Remove="Resources\Images\profile_photo.jpg" />
+	  <None Remove="Resources\Images\save.svg" />
+	  <None Remove="Resources\Images\send_money.svg" />
 	  <None Remove="Resources\Images\visa_svg.png" />
 	  <None Remove="Resources\Images\zipit.png" />
 	</ItemGroup>
@@ -146,6 +148,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WalletPages\RequestCardPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\WalletPages\ViewSavingBottomSheet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WalletPages\VirtualCardOptionsBottomSheet.xaml">

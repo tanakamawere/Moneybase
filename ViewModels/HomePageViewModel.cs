@@ -28,7 +28,7 @@ public partial class HomePageViewModel : ViewModelBase
     public HomePageViewModel(IApiRepository repo)
     {
         repository = repo;
-        //GetUser();
+        GetUser();
     }
 
     async void GetUser()
@@ -36,7 +36,7 @@ public partial class HomePageViewModel : ViewModelBase
         try
         {
             User = await repository.GetUser(AuthenticationResult.UniqueId);
-            UserAccounts = User.Accounts.ToList();
+            UserAccounts = User.Accounts.Where(x => x.AccountType != AccountType.Saving).ToList();
         }
         catch (Exception ex)
         {

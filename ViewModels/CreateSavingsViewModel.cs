@@ -21,9 +21,17 @@ public partial class CreateSavingsViewModel : ViewModelBase
     [ObservableProperty]
     private DateTime goalDueDate;
     [ObservableProperty]
+    private decimal goalAmount;
+    [ObservableProperty]
     private Color selectedColour = Colors.LightSalmon;
     [ObservableProperty]
     private List<Color> colours;
+    [ObservableProperty]
+    private bool isGeneralSavings = true;
+    [ObservableProperty]
+    private string borderDescription = "Great for earning interest on the money you save.";
+    [ObservableProperty]
+    private string borderTitle = "General Savings Account";
 
     LoadingPopup loadingPopup = new();
 
@@ -45,15 +53,35 @@ public partial class CreateSavingsViewModel : ViewModelBase
     private async Task CreateAccount()
     {
         await popups.PushAsync(loadingPopup);
-        Account account = new()
+        Account account;
+        if (IsGeneralSavings.Equals(true))
         {
-            AccountType = AccountType.Saving,
-            AccountName = SavingsAccountTitle,
-            Currency = SavingsAccountCurrency,
-            DueDate = GoalDueDate,
-            Colour = SelectedColour.ToString(),
-            Balance = decimal.Zero,
-        };
+            account = new()
+            {
+                AccountType = AccountType.Saving,
+                AccountName = "General",
+                Currency = SavingsAccountCurrency,
+                DueDate = DateTime.Now.AddYears(50),
+                Colour = Colors.LightBlue.ToHex().ToString(),
+                GoalAmount = decimal.Zero,
+                SavingsType = SavingsType.General,
+                Balance = decimal.Zero,
+            };
+        }
+        else
+        {
+            account = new()
+            {
+                AccountType = AccountType.Saving,
+                AccountName = SavingsAccountTitle,
+                Currency = SavingsAccountCurrency,
+                DueDate = GoalDueDate,
+                Colour = SelectedColour.ToHex().ToString(),
+                GoalAmount = GoalAmount,
+                SavingsType = SavingsType.Goal,
+                Balance = decimal.Zero,
+            };
+        }
 
         bool result = await repository.CreateSavingsAccount(account, authenticationResult.UniqueId);
         if (result.Equals(true))
@@ -65,6 +93,26 @@ public partial class CreateSavingsViewModel : ViewModelBase
             await Toast.Make("Error creating account. Please contact us.", CommunityToolkit.Maui.Core.ToastDuration.Long, 12).Show(new CancellationToken());
         }
 
+        await Shell.Current.GoToAsync("../");
         await popups.PopAsync();
+    }
+    partial void OnIsGeneralSavingsChanged(bool oldValue, bool newValue)
+    {
+        if (newValue.Equals(false))
+        {
+            BorderTitle = "Goals Account";
+            BorderDescription = "Perfect for working towards a particular special day, be it a birthday or anything you like";
+        }
+        else
+        {
+            BorderTitle = "General Savings Account";
+            BorderDescription = "Great for earning interest on the money you save.";
+        }
+    }
+
+    [RelayCommand]
+    private void ChangeAccountStatusType()
+    {
+        IsGeneralSavings = !IsGeneralSavings;
     }
 }

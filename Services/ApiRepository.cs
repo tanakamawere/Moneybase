@@ -7,8 +7,8 @@ public class ApiRepository : IApiRepository
 {
     private static readonly HttpClient _httpClient = new HttpClient()
     {
-        BaseAddress = new Uri("http://10.0.2.2:5052/")
-        //BaseAddress = new Uri("https://4223-77-246-52-168.ngrok-free.app/")
+        //BaseAddress = new Uri("http://10.0.2.2:5052/")
+        BaseAddress = new Uri("https://08d4-197-221-253-169.ngrok-free.app/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()

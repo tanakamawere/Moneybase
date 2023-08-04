@@ -3,13 +3,23 @@
     x:Class="Moneybase.Pages.WalletPages.CreateSavingsAccountPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Moneybase.Converters"
     xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Moneybase.ViewModels"
     Title="Create Savings Account"
     x:DataType="vm:CreateSavingsViewModel"
     Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converters:GeneralSavingsLabelSwitchConverter x:Key="SavingsLabelSwitchConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <VerticalStackLayout>
-        <Border BackgroundColor="{Binding SelectedColour}" HeightRequest="300">
+        <Border BackgroundColor="{Binding SelectedColour}" HeightRequest="260">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="0,0,20,20" />
             </Border.StrokeShape>
@@ -20,49 +30,97 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="5"
+                    VerticalOptions="Center">
                     <Label
                         FontAttributes="Bold"
                         FontSize="28"
-                        Text="Goals and Savings" />
-                    <Label Text="Create a goal to save towards a special day or make a general savings account. Whatever you like!" />
-                    <Label
-                        Margin="0,20,0,0"
-                        FontSize="Caption"
-                        Text="Use the colour picker to customise your account" />
-                    <CollectionView
-                        ItemsLayout="HorizontalList"
-                        ItemsSource="{Binding Colours}"
-                        SelectedItem="{Binding SelectedColour}"
-                        SelectionMode="Single">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Border
-                                    BackgroundColor="{Binding .}"
-                                    Stroke="White"
-                                    StrokeThickness="2"
-                                    Style="{StaticResource SavingsIconBackground}" />
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        Text="{Binding BorderTitle}" />
+                    <Label Text="{Binding BorderDescription}" />
+
+                    <Button
+                        Command="{Binding ChangeAccountStatusTypeCommand}"
+                        Style="{StaticResource TransparentButton}"
+                        Text="Toggle Account Type" />
                 </VerticalStackLayout>
 
                 <Image
                     Grid.Column="1"
                     HeightRequest="100"
-                    Source="credit_cards.svg" />
+                    Source="save.svg" />
             </Grid>
         </Border>
 
-        <VerticalStackLayout Margin="20" Spacing="20">
-            <Entry Placeholder="Name e.g General Savings, Dad's birthday, Roora" />
-            <Picker
-                ItemDisplayBinding="{Binding .}"
-                ItemsSource="{Binding CurrenciesList}"
-                SelectedItem="{Binding CurrencySelected}" />
-            <DatePicker />
+        <VerticalStackLayout Margin="20">
+            <!--  Colour Picker  -->
+            <VerticalStackLayout IsVisible="{Binding IsGeneralSavings, Converter={StaticResource InvertedBoolConverter}}">
+                <Label
+                    FontSize="Caption"
+                    HorizontalOptions="Center"
+                    Text="Use the colour picker to customise your account" />
+                <CollectionView
+                    HorizontalOptions="Center"
+                    ItemsLayout="HorizontalList"
+                    ItemsSource="{Binding Colours}"
+                    SelectedItem="{Binding SelectedColour}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                BackgroundColor="{Binding .}"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                Style="{StaticResource SavingsIconBackground}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Entry
+                    IsVisible="{Binding IsGeneralSavings, Converter={StaticResource InvertedBoolConverter}}"
+                    Keyboard="Text"
+                    Placeholder="Goal title e.g Dad's birthday, Roora"
+                    Text="{Binding SavingsAccountTitle}" />
+                <Entry
+                    IsVisible="{Binding IsGeneralSavings, Converter={StaticResource InvertedBoolConverter}}"
+                    Keyboard="Numeric"
+                    Placeholder="Target Amount"
+                    Text="{Binding GoalAmount}" />
 
-            <Button Command="{Binding CreateAccountCommand}" Text="Create" />
+
+                <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label
+                        FontSize="18"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Goal End Date: "
+                        VerticalOptions="Center" />
+
+                    <DatePicker
+                        Date="{Binding GoalDueDate}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+
+
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Account Currency: "
+                    VerticalOptions="Center" />
+
+                <Picker
+                    ItemDisplayBinding="{Binding .}"
+                    ItemsSource="{Binding CurrenciesList}"
+                    SelectedItem="{Binding CurrencySelected}" />
+            </HorizontalStackLayout>
+
+            <Button
+                Margin="0,20"
+                Command="{Binding CreateAccountCommand}"
+                Text="Create" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

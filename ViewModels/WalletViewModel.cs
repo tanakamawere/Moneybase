@@ -11,21 +11,32 @@ public partial class WalletViewModel : ViewModelBase
 {
     [ObservableProperty]
     private IEnumerable<VirtualCard> userCards;
+    [ObservableProperty]
+    private IEnumerable<Account> savingsAccounts;
+
     RequestCardPopup requestCardPopup;
 
     public WalletViewModel(IApiRepository repo)
     {
         repository = repo;
-        //requestCardPopup = new RequestCardPopup(repository, AuthenticationResult.UniqueId);
-        requestCardPopup = new RequestCardPopup(repository, "zvandoda");
-
-        //GetVirtualCards();
+        requestCardPopup = new RequestCardPopup(repository, AuthenticationResult.UniqueId);
+        //requestCardPopup = new RequestCardPopup(repository, "zvandoda");
+        InitMethods();
+    }
+    [RelayCommand]
+    private async Task InitMethods()
+    {
+        await GetVirtualCards();
+        await GetSavingsAccounts();
     }
 
-    [RelayCommand]
     private async Task GetVirtualCards()
     {
         UserCards = await repository.GetVirtualCards(AuthenticationResult.UniqueId);
+    }
+    private async Task GetSavingsAccounts()
+    {
+        SavingsAccounts = await repository.GetSavingsAccounts(AuthenticationResult.UniqueId);
     }
 
     [RelayCommand]
@@ -33,6 +44,15 @@ public partial class WalletViewModel : ViewModelBase
     {
         await MopupService.Instance.PushAsync(requestCardPopup);
         //await GetVirtualCards();
+    }
+
+    [RelayCommand]
+    private async Task GoToSavingsAccount(Account account)
+    {
+        if(account == null) { return; }
+
+        var send = new ViewSavingBottomSheet(repository, account);
+        await send.ShowAsync();
     }
 
     [RelayCommand]

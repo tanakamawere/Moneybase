@@ -10,8 +10,8 @@
     Shell.NavBarIsVisible="False">
     <RefreshView
         Margin="20,10"
-        Command="{Binding GetVirtualCardsCommand}"
-        IsRefreshing="{Binding GetVirtualCardsCommand.IsRunning}">
+        Command="{Binding InitMethodsCommand}"
+        IsRefreshing="{Binding InitMethodsCommand.IsRunning}">
 
         <VerticalStackLayout>
 
@@ -152,33 +152,47 @@
             </Grid>
 
             <!--  Savings and Goals Item Template  -->
-            <Border
-                BackgroundColor="LightPink"
-                HeightRequest="150"
-                WidthRequest="150">
-                <Grid Padding="10">
-                    <Border
-                        HorizontalOptions="End"
-                        Style="{StaticResource SavingsIconBackground}"
-                        VerticalOptions="Start">
-                        <Image Style="{StaticResource IconImage}">
-                            <Image.Source>
-                                <FontImageSource
-                                    FontFamily="fasolid"
-                                    Glyph="{x:Static helpers:FontAwesome.Hands}"
-                                    Size="20"
-                                    Color="{AppThemeBinding Light={StaticResource Primary},
-                                                            Dark={StaticResource White}}" />
-                            </Image.Source>
-                        </Image>
-                    </Border>
+            <CollectionView
+                EmptyView="There are no savings accounts"
+                ItemsLayout="HorizontalList"
+                ItemsSource="{Binding SavingsAccounts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Account">
 
-                    <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="End">
-                        <Label FontAttributes="Bold" Text="Dad's birthday" />
-                        <ProgressBar Progress="0.5" />
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
+                        <Border
+                            BackgroundColor="{Binding Colour}"
+                            HeightRequest="150"
+                            WidthRequest="150">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:WalletViewModel}}, Path=GoToSavingsAccountCommand}" CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                            <Grid Padding="10">
+                                <Border
+                                    HorizontalOptions="End"
+                                    Style="{StaticResource SavingsIconBackground}"
+                                    VerticalOptions="Start">
+                                    <Image Style="{StaticResource IconImage}">
+                                        <Image.Source>
+                                            <FontImageSource
+                                                FontFamily="fasolid"
+                                                Glyph="{x:Static helpers:FontAwesome.Hands}"
+                                                Size="20"
+                                                Color="{AppThemeBinding Light={StaticResource Primary},
+                                                                        Dark={StaticResource White}}" />
+                                        </Image.Source>
+                                    </Image>
+                                </Border>
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding AccountName}"
+                                    VerticalOptions="End" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
 
             <!--  Budget & Analytics bar  -->
