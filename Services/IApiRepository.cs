@@ -6,7 +6,7 @@ public interface IApiRepository
 {
     Task<IEnumerable<User>> GetUsersAsync();
     Task<IEnumerable<Account>> GetAccountsAsync(string id);
-    Task<IEnumerable<Transaction>> GetTransactionsAsync();
+    Task<IEnumerable<Transaction>> GetTransactionsAsync(string userId, int number);
 
     Task<User> GetUser(string authId);
     Task<Account> GetAccount(int userId);

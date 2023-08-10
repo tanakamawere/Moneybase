@@ -8,7 +8,7 @@ public class ApiRepository : IApiRepository
     private static readonly HttpClient _httpClient = new HttpClient()
     {
         //BaseAddress = new Uri("http://10.0.2.2:5052/")
-        BaseAddress = new Uri("https://08d4-197-221-253-169.ngrok-free.app/")
+        BaseAddress = new Uri("https://2b6f-197-221-253-133.ngrok-free.app/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()
@@ -21,9 +21,9 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<IEnumerable<Account>>($"/accounts/get/{id}");
     }
 
-    public async Task<IEnumerable<Transaction>> GetTransactionsAsync()
+    public async Task<IEnumerable<Transaction>> GetTransactionsAsync(string userId, int number)
     {
-        return await _httpClient.GetFromJsonAsync<IEnumerable<Transaction>>("/transactions");
+        return await _httpClient.GetFromJsonAsync<IEnumerable<Transaction>>($"/transactions_recent/{userId}/{number}");
     }
 
     public async Task<Account> GetAccount(int userId)

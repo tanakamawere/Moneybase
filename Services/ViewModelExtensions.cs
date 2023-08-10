@@ -8,7 +8,7 @@ public static class ViewModelExtensions
     {
         builder.Services.AddSingleton<HomePageViewModel>();
         builder.Services.AddSingleton<WalletViewModel>();
-        builder.Services.AddSingleton<ProfileViewModel>();
+        builder.Services.AddTransient<ProfileViewModel>();
 
         builder.Services.AddSingleton<AppLandingViewModel>();
         builder.Services.AddSingleton<CashOutViewModel>();
@@ -18,6 +18,7 @@ public static class ViewModelExtensions
         builder.Services.AddSingleton<RemotePayViewModel>();
 
         builder.Services.AddTransient<SendMoneyViewModel>();
+        builder.Services.AddTransient<AllTransactionViewModel>();
         builder.Services.AddTransient<CreateSavingsViewModel>();
 
         return builder;

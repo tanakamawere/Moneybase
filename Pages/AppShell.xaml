@@ -24,12 +24,6 @@
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:WalletPage}" />
         </Tab>
-        <Tab Title="You">
-            <Tab.Icon>
-                <FontImageSource FontFamily="fasolid" Glyph="{x:Static helpers:FontAwesome.User}" />
-            </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />
-        </Tab>
     </TabBar>
 
 </Shell>

@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Moneybase.Pages;
 using Moneybase.Pages.WalletPages;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
+using Mopups.Interfaces;
 using Mopups.Services;
 
 namespace Moneybase.ViewModels;
@@ -16,18 +18,31 @@ public partial class WalletViewModel : ViewModelBase
 
     RequestCardPopup requestCardPopup;
 
-    public WalletViewModel(IApiRepository repo)
+    public WalletViewModel(IApiRepository repo, IPopupNavigation popup)
     {
         repository = repo;
+        mopupNavigation = popup;
+        loadingPopup = new LoadingPopup();
         requestCardPopup = new RequestCardPopup(repository, AuthenticationResult.UniqueId);
-        //requestCardPopup = new RequestCardPopup(repository, "zvandoda");
         InitMethods();
     }
     [RelayCommand]
     private async Task InitMethods()
     {
-        await GetVirtualCards();
-        await GetSavingsAccounts();
+        await mopupNavigation.PushAsync(loadingPopup);
+        try
+        {
+            await GetVirtualCards();
+            await GetSavingsAccounts();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await mopupNavigation.PopAsync(true);
+        }
     }
 
     private async Task GetVirtualCards()
@@ -43,7 +58,6 @@ public partial class WalletViewModel : ViewModelBase
     private async Task RequestVirtualCard()
     {
         await MopupService.Instance.PushAsync(requestCardPopup);
-        //await GetVirtualCards();
     }
 
     [RelayCommand]
@@ -69,7 +83,5 @@ public partial class WalletViewModel : ViewModelBase
 
         var send = new VirtualCardOptionsBottomSheet(repository, card);
         await send.ShowAsync();
-
-        //await GetVirtualCards();
     }
 }

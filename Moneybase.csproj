@@ -67,9 +67,11 @@
 	  <None Remove="Resources\Images\male_avatar.svg" />
 	  <None Remove="Resources\Images\ok_logo.png" />
 	  <None Remove="Resources\Images\person_receive.jpg" />
+	  <None Remove="Resources\Images\profile_banner.svg" />
 	  <None Remove="Resources\Images\profile_photo.jpg" />
 	  <None Remove="Resources\Images\save.svg" />
 	  <None Remove="Resources\Images\send_money.svg" />
+	  <None Remove="Resources\Images\transactions.svg" />
 	  <None Remove="Resources\Images\visa_svg.png" />
 	  <None Remove="Resources\Images\zipit.png" />
 	</ItemGroup>
@@ -78,6 +80,7 @@
 		<PackageReference Include="Camera.MAUI" Version="1.4.4" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.54.1" />
 		<PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="2.31.0" />
@@ -96,6 +99,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\AllTransactionsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\CashOutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

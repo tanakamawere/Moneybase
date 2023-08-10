@@ -9,7 +9,7 @@ public static class PagesExtensions
     public static MauiAppBuilder ConfigurePages(this MauiAppBuilder builder)
     {
         builder.Services.AddSingleton<HomePage>();
-        builder.Services.AddSingleton<ProfilePage>();
+        builder.Services.AddTransient<ProfilePage>();
         builder.Services.AddSingleton<WalletPage>();
 
         builder.Services.AddTransient<AppLandingPage>();
@@ -20,6 +20,7 @@ public static class PagesExtensions
         builder.Services.AddTransient<SendMoneyPage>();
         builder.Services.AddTransient<SignUpPage>();
         builder.Services.AddTransient<CreateSavingsAccountPage>();
+        builder.Services.AddTransient<AllTransactionsPage>();
 
         return builder;
     }

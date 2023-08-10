@@ -17,8 +17,9 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(SendMoneyPage), typeof(SendMoneyPage));
         Routing.RegisterRoute(nameof(GroupPayPage), typeof(GroupPayPage));
+        Routing.RegisterRoute(nameof(RemotePayPage), typeof(RemotePayPage));    
         Routing.RegisterRoute(nameof(DirectPayPage), typeof(DirectPayPage));
-        Routing.RegisterRoute(nameof(RemotePayPage), typeof(RemotePayPage));
+        Routing.RegisterRoute(nameof(AllTransactionsPage), typeof(AllTransactionsPage));
         Routing.RegisterRoute(nameof(CashOutPage), typeof(CashOutPage));
         Routing.RegisterRoute(nameof(CreateSavingsAccountPage), typeof(CreateSavingsAccountPage));
     }

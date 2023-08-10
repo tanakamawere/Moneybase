@@ -17,30 +17,37 @@ public partial class HomePageViewModel : ViewModelBase
     User user;
     [ObservableProperty]
     IEnumerable<Account> userAccounts;
-
-
+    [ObservableProperty]
+    IEnumerable<Transaction> userTransactions;
     [ObservableProperty]
     string userName;
     [ObservableProperty]
     string email;
 
-
-    public HomePageViewModel(IApiRepository repo)
+    public HomePageViewModel(IApiRepository repo, IPopupNavigation popup)
     {
         repository = repo;
+        mopupNavigation = popup;
+        loadingPopup = new LoadingPopup();
         GetUser();
     }
-
-    async void GetUser()
+    [RelayCommand]
+    private async Task GetUser()
     {
+        await mopupNavigation.PushAsync(loadingPopup);
         try
         {
             User = await repository.GetUser(AuthenticationResult.UniqueId);
             UserAccounts = User.Accounts.Where(x => x.AccountType != AccountType.Saving).ToList();
+            UserTransactions = await repository.GetTransactionsAsync(AuthenticationResult.UniqueId, 3);
         }
         catch (Exception ex)
         {
-            throw ex;
+            Console.WriteLine(ex);
+        }
+        finally
+        {
+            await mopupNavigation.PopAsync(true);
         }
     }
 
@@ -57,8 +64,11 @@ public partial class HomePageViewModel : ViewModelBase
     [RelayCommand]
     private async Task NavigateTo(string page)
     {
+        await mopupNavigation.PushAsync(loadingPopup);
         await Shell.Current.GoToAsync(page);
+        await mopupNavigation.PopAsync(true);
     }
+
     [RelayCommand]
     private async Task DirectPayOptions()
     {

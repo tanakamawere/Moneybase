@@ -21,7 +21,7 @@
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
                 Text="Please wait..."
-                VerticalOptions="Center" />
+                VerticalOptions="CenterAndExpand" />
             <ActivityIndicator
                 IsEnabled="True"
                 IsRunning="True"

@@ -4,5 +4,50 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
     xmlns:templates="clr-namespace:Moneybase.Templates"
-    Title="ProfilePage" />
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    Title="Your Profile"
+    x:DataType="vm:ProfileViewModel">
+    <VerticalStackLayout Spacing="20">
+        <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource GrayBackground}}" HeightRequest="200">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout>
+
+                <Grid Padding="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="10"
+                        VerticalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="28"
+                            Text="{Binding User.Name}" />
+                        <Label Text="{Binding User.PhoneNumber}" />
+                        <Label Text="{Binding User.Email}" />
+                    </VerticalStackLayout>
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="100"
+                        Source="profile_banner.svg" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+        <!--  Log Out Tapped  -->
+        <Button
+            BorderColor="Red"
+            Command="{Binding SignOutCommand}"
+            Style="{StaticResource TransparentButton}"
+            Text="Log Out"
+            TextColor="Red" />
+    </VerticalStackLayout>
+</ContentPage>

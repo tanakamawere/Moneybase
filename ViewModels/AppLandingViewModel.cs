@@ -4,22 +4,23 @@ using Moneybase.MSALClient;
 using Moneybase.Pages;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
+using Mopups.Interfaces;
 
 namespace Moneybase.ViewModels;
 
 public partial class AppLandingViewModel : ViewModelBase
 {
-    private readonly PublicClientSingleton publicClientSingleton;
-    private readonly IApiRepository repository;
-    public AppLandingViewModel(IApiRepository repo)
+    public AppLandingViewModel(IApiRepository repo, IPopupNavigation popup)
     {
-        publicClientSingleton = new PublicClientSingleton();
         repository = repo;
+        mopupNavigation = popup;
+        loadingPopup = new LoadingPopup();
     }
 
     [RelayCommand]
     private async Task SignIn()
     {
+        await mopupNavigation.PushAsync(loadingPopup);
         AuthenticationResult authenticationResult = await publicClientSingleton.AcquireTokenSilentAsync();
 
         if (!authenticationResult.Account.Equals(null))
@@ -29,9 +30,13 @@ public partial class AppLandingViewModel : ViewModelBase
                 Application.Current.MainPage = new AppShell();
             else
                 await Shell.Current.GoToAsync(nameof(SignUpPage));
+
+            await mopupNavigation.PopAsync(true);
         }
         else
             await Shell.Current.DisplayAlert("Authentication failed", "Please try again", "Cancel");
+
+        await mopupNavigation.PopAsync(true);
     }
 
     public void CheckIfLoggedIn()

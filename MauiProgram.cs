@@ -1,10 +1,10 @@
 ﻿using Camera.MAUI;
 using CommunityToolkit.Maui;
+using Microcharts.Maui;
 using Microsoft.Extensions.Logging;
 using Moneybase.Pages.SendMoneyPages;
 using Moneybase.Services;
 using Mopups.Hosting;
-using Mopups.Interfaces;
 using Mopups.Services;
 using The49.Maui.BottomSheet;
 
@@ -18,6 +18,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+			.UseMicrocharts()
 			.ConfigureMopups()
 			.UseMauiCameraView()
 			.UseBottomSheet()

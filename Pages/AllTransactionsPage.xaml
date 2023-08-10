@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.AllTransactionsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+    xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    Title="All Transactions"
+    x:DataType="vm:AllTransactionViewModel"
+    Shell.TabBarIsVisible="False">
+
+    <RefreshView Command="{Binding GetTransactionsCommand}" IsRefreshing="{Binding GetTransactionsCommand.IsRunning}">
+        <ScrollView>
+            <VerticalStackLayout>
+                <Border BackgroundColor="LightPink" HeightRequest="300">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0,0,20,20" />
+                    </Border.StrokeShape>
+
+                    <Grid Padding="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <VerticalStackLayout
+                            Grid.Column="0"
+                            Spacing="10"
+                            VerticalOptions="Center">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="28"
+                                Text="Transactions" />
+                            <Label Text="Recent Transactions" />
+                        </VerticalStackLayout>
+
+                        <Image
+                            Grid.Column="1"
+                            HeightRequest="100"
+                            Source="transactions.svg" />
+                    </Grid>
+
+                </Border>
+
+                <!--  Transaction History  -->
+                <Label
+                    Margin="20,10"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Text="Last Ten" />
+
+                <CollectionView
+                    Margin="10"
+                    EmptyView="No transactions to show"
+                    ItemsSource="{Binding Transactions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Transaction">
+                            <Border
+                                Margin="0,0,0,5"
+                                Padding="5"
+                                HeightRequest="100"
+                                StrokeShape="RoundRectangle 20"
+                                StrokeThickness="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="100" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border
+                                        Grid.Column="0"
+                                        HeightRequest="60"
+                                        StrokeShape="RoundRectangle 50"
+                                        StrokeThickness="0"
+                                        WidthRequest="60">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HeightRequest="120"
+                                            Source="{Binding Image}"
+                                            WidthRequest="120" />
+                                    </Border>
+
+                                    <VerticalStackLayout
+                                        Grid.Column="1"
+                                        Margin="5,0,0,0"
+                                        Spacing="5"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="Body"
+                                            Text="{Binding RecipientName}" />
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="Small"
+                                            Text="{Binding TransactedAt, StringFormat='{}{0:dddd dd MMMM yyyy}'}"
+                                            TextColor="{StaticResource Gray300}" />
+                                    </VerticalStackLayout>
+
+                                    <Label
+                                        Grid.Column="2"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontSize="20" Text="{Binding Currency}" />
+                                                <Span FontSize="20" Text="{Binding Amount}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>
