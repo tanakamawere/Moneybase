@@ -22,6 +22,7 @@ public static class ViewModelExtensions
         builder.Services.AddTransient<CreateSavingsViewModel>();
         builder.Services.AddTransient<OnboardingDetailsViewModel>();
         builder.Services.AddTransient<SecurityPINViewModel>();
+        builder.Services.AddTransient<SetPINViewModel>();
 
         return builder;
     }

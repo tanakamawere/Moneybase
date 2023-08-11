@@ -10,6 +10,7 @@ public partial class LandingShell : Shell
 
 		Routing.RegisterRoute(nameof(AppLandingPage), typeof(AppLandingPage));
 		Routing.RegisterRoute(nameof(OnboardingDetailsPage), typeof(OnboardingDetailsPage));
-		Routing.RegisterRoute(nameof(SecurityPINPage), typeof(SecurityPINPage));
-	}
+        Routing.RegisterRoute(nameof(SecurityPINPage), typeof(SecurityPINPage));
+        Routing.RegisterRoute(nameof(SetPINPage), typeof(SetPINPage));
+    }
 }

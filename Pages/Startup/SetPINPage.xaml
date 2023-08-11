@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Moneybase.Pages.SecurityPINPage"
+    x:Class="Moneybase.Pages.SetPINPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:Moneybase.Helpers"
     xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
     xmlns:pinview="clr-namespace:PINView.Maui;assembly=PINView.Maui"
     xmlns:vm="clr-namespace:Moneybase.ViewModels"
-    x:DataType="vm:SecurityPINViewModel">
+    x:DataType="vm:SetPINViewModel">
     <VerticalStackLayout Padding="20">
         <Label
             Margin="10"

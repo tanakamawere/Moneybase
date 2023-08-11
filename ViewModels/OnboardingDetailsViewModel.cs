@@ -34,7 +34,7 @@ public partial class OnboardingDetailsViewModel : ViewModelBase
             AuthId = AuthenticationResult.UniqueId,
         };
 
-        await Shell.Current.GoToAsync(nameof(SecurityPINPage), true, new Dictionary<string, object> 
+        await Shell.Current.GoToAsync(nameof(SetPINPage), true, new Dictionary<string, object> 
         {
             {"onboardingUser", user }
         });

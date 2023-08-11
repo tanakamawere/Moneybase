@@ -119,7 +119,7 @@
                         <DataTemplate x:DataType="models:Account">
 
                             <Border
-                                BackgroundColor="AliceBlue"
+                                BackgroundColor="{Binding Colour}"
                                 StrokeShape="RoundRectangle 20"
                                 StrokeThickness="0">
                                 <VerticalStackLayout Margin="20">

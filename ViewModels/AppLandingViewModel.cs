@@ -5,7 +5,6 @@ using Moneybase.Pages;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
 using Mopups.Interfaces;
-using System.Security.Claims;
 
 namespace Moneybase.ViewModels;
 
@@ -21,7 +20,7 @@ public partial class AppLandingViewModel : ViewModelBase
     [RelayCommand]
     async Task GoToPage()
     {
-        await Shell.Current.GoToAsync(nameof(OnboardingDetailsPage));
+        await Shell.Current.GoToAsync(nameof(SecurityPINPage));
     }
 
     [RelayCommand]
@@ -34,9 +33,9 @@ public partial class AppLandingViewModel : ViewModelBase
         {
             FirstTimeUser userIsNew = await repository.UserIsNew(authenticationResult.UniqueId);
             if (userIsNew.IsNew.Equals(false))
-                Application.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync(nameof(SecurityPINPage));
             else
-            {   
+            {
                 string emailYangu = authenticationResult.ClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "emails").Value.ToString();
                 await Shell.Current.GoToAsync($"{nameof(OnboardingDetailsPage)}?onboardingEmail={emailYangu}");
             }
@@ -55,7 +54,7 @@ public partial class AppLandingViewModel : ViewModelBase
         {
             AuthenticationResult result = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
             if (result != null)
-                Application.Current.MainPage = new AppShell();
+                Shell.Current.GoToAsync(nameof(SecurityPINPage));
         }
         catch (Exception)
         {

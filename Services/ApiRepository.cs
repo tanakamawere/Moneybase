@@ -127,4 +127,10 @@ public class ApiRepository : IApiRepository
         else
             return false;
     }
+
+    public async Task<bool> CheckPIN(string authId, string pinString)
+    {
+        var response = await _httpClient.GetStringAsync($"/users/check_pin/{authId}/{pinString}");
+        return bool.Parse(response);
+    }
 }

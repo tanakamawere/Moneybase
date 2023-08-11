@@ -14,7 +14,7 @@ public static class PagesExtensions
 
         builder.Services.AddTransient<AppLandingPage>();
         builder.Services.AddTransient<CashOutPage>();
-        builder.Services.AddTransient<SecurityPINPage>();
+        builder.Services.AddTransient<SetPINPage>();
         builder.Services.AddTransient<DirectPayPage>();
         builder.Services.AddTransient<GroupPayPage>();
         builder.Services.AddTransient<RemotePayPage>();
@@ -22,6 +22,7 @@ public static class PagesExtensions
         builder.Services.AddTransient<OnboardingDetailsPage>();
         builder.Services.AddTransient<CreateSavingsAccountPage>();
         builder.Services.AddTransient<AllTransactionsPage>();
+        builder.Services.AddTransient<SecurityPINPage>();
 
         return builder;
     }

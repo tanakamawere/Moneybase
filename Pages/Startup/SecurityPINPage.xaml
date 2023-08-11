@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<codePage:CodePage
+    x:Class="Moneybase.Pages.SecurityPINPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
+    xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=PinCodes.Authorization.Maui"
+    xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    x:DataType="vm:SecurityPINViewModel"
+    CallbackCodeFinished="{Binding CheckPinCommand}"
+    Headline="Moneybase"
+    SubHeadline="Enter your pin, same as the one you use for USSD">
+
+    <codePage:CodePage.Illustration>
+        <Image HeightRequest="100" Source="security_pin.svg" />
+    </codePage:CodePage.Illustration>
+
+    <codePage:CodePage.CodeViewer>
+        <codeViewer:CircleShowingCodeViewer
+            Margin="0,0,0,40"
+            CodeLength="4"
+            FontFamily="RalewayBlack"
+            FontSize="25"
+            Size="40"
+            TextColor="{AppThemeBinding Light=White,
+                                        Dark=Black}"
+            Color="{AppThemeBinding Light={StaticResource Primary},
+                                    Dark=White}" />
+    </codePage:CodePage.CodeViewer>
+
+    <codePage:CodePage.KeyboardViewer>
+        <keyboard:KeyboardCircle
+            CancelText="Cancel"
+            CancelTextColor="{AppThemeBinding Light=Black,
+                                              Dark=White}"
+            CancelTextFontSize="18"
+            FontSize="25"
+            ShapeColor="{AppThemeBinding Light={StaticResource Primary},
+                                         Dark=White}"
+            Size="70"
+            TextColor="{AppThemeBinding Light={StaticResource Primary},
+                                        Dark=White}" />
+    </codePage:CodePage.KeyboardViewer>
+</codePage:CodePage>

@@ -2,7 +2,7 @@ using Moneybase.ViewModels;
 
 namespace Moneybase.Pages;
 
-public partial class SecurityPINPage : ContentPage
+public partial class SecurityPINPage
 {
 	public SecurityPINPage(SecurityPINViewModel vm)
 	{

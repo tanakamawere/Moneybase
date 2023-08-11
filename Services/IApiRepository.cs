@@ -11,6 +11,7 @@ public interface IApiRepository
     Task<User> GetUser(string authId);
     Task<Account> GetAccount(int userId);
     Task<FirstTimeUser> UserIsNew(string authId);
+    Task<bool> CheckPIN(string authId, string pinString);
 
     Task<bool> PostUser(User user);
     Task PostAccount(Account account);
