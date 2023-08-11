@@ -8,7 +8,7 @@ public class ApiRepository : IApiRepository
     private static readonly HttpClient _httpClient = new HttpClient()
     {
         //BaseAddress = new Uri("http://10.0.2.2:5052/")
-        BaseAddress = new Uri("https://2b6f-197-221-253-133.ngrok-free.app/")
+        BaseAddress = new Uri("https://327a-217-15-117-112.ngrok-free.app/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()
@@ -46,9 +46,13 @@ public class ApiRepository : IApiRepository
         await _httpClient.PostAsJsonAsync($"/transaction/post/{transaction}", transaction);
     }
 
-    public async Task PostUser(User user)
+    public async Task<bool> PostUser(User user)
     {
-        await _httpClient.PostAsJsonAsync($"/users/add/{user}", user);
+        var response = await _httpClient.PostAsJsonAsync($"/users/add/{user}", user);
+        if (response.IsSuccessStatusCode)
+            return true;
+        else 
+            return false;
     }
 
     public async Task<FirstTimeUser> UserIsNew(string authId)

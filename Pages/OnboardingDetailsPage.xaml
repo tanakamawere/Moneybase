@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.OnboardingDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    x:DataType="vm:OnboardingDetailsViewModel">
+
+    <VerticalStackLayout>
+        <Border BackgroundColor="LightBlue" HeightRequest="250">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout>
+                <Label
+                    Margin="10"
+                    FontSize="20"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Page 2 of 3" />
+                <Grid Padding="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="10"
+                        VerticalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="28"
+                            Text="Welcome to a new era of banking" />
+                        <Label Text="Great! We just need a few more details to make your accounts." />
+                    </VerticalStackLayout>
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="100"
+                        Source="onboarding_data.svg" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Entry
+                Keyboard="Text"
+                Placeholder="First Name and Surname"
+                Text="{Binding Name}" />
+            <Entry
+                Keyboard="Telephone"
+                Placeholder="Phone Number"
+                Text="{Binding PhoneNumber}" />
+            <Entry
+                Keyboard="Email"
+                Placeholder="Email Address"
+                Text="{Binding Email}" />
+
+            <Button
+                Margin="0,10"
+                Command="{Binding CreateUserCommand}"
+                Text="Next" />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

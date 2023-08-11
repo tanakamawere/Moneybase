@@ -14,11 +14,12 @@ public static class PagesExtensions
 
         builder.Services.AddTransient<AppLandingPage>();
         builder.Services.AddTransient<CashOutPage>();
+        builder.Services.AddTransient<SecurityPINPage>();
         builder.Services.AddTransient<DirectPayPage>();
         builder.Services.AddTransient<GroupPayPage>();
         builder.Services.AddTransient<RemotePayPage>();
         builder.Services.AddTransient<SendMoneyPage>();
-        builder.Services.AddTransient<SignUpPage>();
+        builder.Services.AddTransient<OnboardingDetailsPage>();
         builder.Services.AddTransient<CreateSavingsAccountPage>();
         builder.Services.AddTransient<AllTransactionsPage>();
 

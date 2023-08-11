@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.SecurityPINPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:pinview="clr-namespace:PINView.Maui;assembly=PINView.Maui"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    x:DataType="vm:SecurityPINViewModel">
+    <VerticalStackLayout Padding="20">
+        <Label
+            Margin="10"
+            FontSize="20"
+            HorizontalOptions="Center"
+            Text="Page 3 of 3"
+            VerticalOptions="Start" />
+
+        <Label
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Text="Enter a security PIN to enter the app with. It's the same you use for USSD transactions" />
+
+        <pinview:PINView
+            BoxBackgroundColor="{AppThemeBinding Light={StaticResource Primary},
+                                                 Dark={StaticResource Gray300}}"
+            BoxShape="Circle"
+            HorizontalOptions="Center"
+            PINLength="4"
+            PINValue="{Binding PIN}"
+            Color="White" />
+
+        <Button
+            Margin="20"
+            Command="{Binding PostUserWithPinCommand}"
+            Style="{StaticResource TransparentButton}"
+            Text="Get Started"
+            VerticalOptions="End" />
+    </VerticalStackLayout>
+</ContentPage>

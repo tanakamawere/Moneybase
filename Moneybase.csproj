@@ -66,10 +66,12 @@
 	  <None Remove="Resources\Images\loading_pic.svg" />
 	  <None Remove="Resources\Images\male_avatar.svg" />
 	  <None Remove="Resources\Images\ok_logo.png" />
+	  <None Remove="Resources\Images\onboarding_data.svg" />
 	  <None Remove="Resources\Images\person_receive.jpg" />
 	  <None Remove="Resources\Images\profile_banner.svg" />
 	  <None Remove="Resources\Images\profile_photo.jpg" />
 	  <None Remove="Resources\Images\save.svg" />
+	  <None Remove="Resources\Images\security_banner.svg" />
 	  <None Remove="Resources\Images\send_money.svg" />
 	  <None Remove="Resources\Images\transactions.svg" />
 	  <None Remove="Resources\Images\visa_svg.png" />
@@ -85,6 +87,7 @@
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.54.1" />
 		<PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="2.31.0" />
 		<PackageReference Include="Mopups" Version="1.1.1" />
+		<PackageReference Include="PINView.MAUI" Version="1.0.1" />
 		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.1" />
 	</ItemGroup>
 
@@ -93,6 +96,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\OnboardingDetailsPage.xaml.cs">
+	    <DependentUpon>OnboardingDetailsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\WalletPage.xaml.cs">
 	    <DependentUpon>WalletPage.xaml</DependentUpon>
 	  </Compile>
@@ -144,7 +150,7 @@
 	  <MauiXaml Update="Pages\SendMoneyPages\SendMoneyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\SignUpPage.xaml">
+	  <MauiXaml Update="Pages\OnboardingDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WalletPage.xaml">
@@ -154,6 +160,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WalletPages\RequestCardPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SecurityPINPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WalletPages\ViewSavingBottomSheet.xaml">

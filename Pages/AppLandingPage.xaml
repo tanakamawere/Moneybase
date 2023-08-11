@@ -32,18 +32,14 @@
         </Label>
 
         <Button
-            x:Name="SignInButton"
             Margin="20"
-            BackgroundColor="Transparent"
-            BorderColor="{AppThemeBinding Light={StaticResource White},
-                                          Dark={StaticResource White}}"
-            BorderWidth="3"
+            BorderColor="White"
             Command="{Binding SignInCommand}"
             FontAttributes="Bold"
-            FontSize="Large"
+            FontSize="20"
+            Style="{StaticResource TransparentButton}"
             Text="Get Started"
-            TextColor="{AppThemeBinding Light={StaticResource White},
-                                        Dark={StaticResource White}}"
+            TextColor="White"
             VerticalOptions="End" />
     </Grid>
 </ContentPage>

@@ -9,6 +9,7 @@ public partial class LandingShell : Shell
 		InitializeComponent();
 
 		Routing.RegisterRoute(nameof(AppLandingPage), typeof(AppLandingPage));
-		Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
+		Routing.RegisterRoute(nameof(OnboardingDetailsPage), typeof(OnboardingDetailsPage));
+		Routing.RegisterRoute(nameof(SecurityPINPage), typeof(SecurityPINPage));
 	}
 }

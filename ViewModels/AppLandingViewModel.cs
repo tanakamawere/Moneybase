@@ -5,6 +5,7 @@ using Moneybase.Pages;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
 using Mopups.Interfaces;
+using System.Security.Claims;
 
 namespace Moneybase.ViewModels;
 
@@ -15,6 +16,12 @@ public partial class AppLandingViewModel : ViewModelBase
         repository = repo;
         mopupNavigation = popup;
         loadingPopup = new LoadingPopup();
+    }
+
+    [RelayCommand]
+    async Task GoToPage()
+    {
+        await Shell.Current.GoToAsync(nameof(OnboardingDetailsPage));
     }
 
     [RelayCommand]
@@ -29,14 +36,17 @@ public partial class AppLandingViewModel : ViewModelBase
             if (userIsNew.IsNew.Equals(false))
                 Application.Current.MainPage = new AppShell();
             else
-                await Shell.Current.GoToAsync(nameof(SignUpPage));
-
+            {   
+                string emailYangu = authenticationResult.ClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "emails").Value.ToString();
+                await Shell.Current.GoToAsync($"{nameof(OnboardingDetailsPage)}?onboardingEmail={emailYangu}");
+            }
             await mopupNavigation.PopAsync(true);
         }
         else
+        {
             await Shell.Current.DisplayAlert("Authentication failed", "Please try again", "Cancel");
-
-        await mopupNavigation.PopAsync(true);
+            await mopupNavigation.PopAsync(true);
+        }
     }
 
     public void CheckIfLoggedIn()
