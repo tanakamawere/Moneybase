@@ -11,12 +11,14 @@ public partial class ProfileViewModel : ViewModelBase
 {
     [ObservableProperty]
     private User user;
+    private readonly LogoutPopup logoutPopup;
 
     public ProfileViewModel(IApiRepository repo, IPopupNavigation popup)
     {
         repository = repo;
         mopupNavigation = popup;
         loadingPopup = new LoadingPopup();
+        logoutPopup = new LogoutPopup();
         GetUser();
     }
 
@@ -49,15 +51,11 @@ public partial class ProfileViewModel : ViewModelBase
 
             await Task.Delay(3000);
 
-            Application.Current.MainPage = new LandingShell();
+            await mopupNavigation.PushAsync(logoutPopup, true);
         }
         catch (Exception)
         {
             throw;
-        }
-        finally
-        {
-            await mopupNavigation.PopAsync(true);
         }
     }
 }

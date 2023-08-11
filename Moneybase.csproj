@@ -64,6 +64,7 @@
 	  <None Remove="Resources\Images\ecocash.png" />
 	  <None Remove="Resources\Images\innbucks.png" />
 	  <None Remove="Resources\Images\loading_pic.svg" />
+	  <None Remove="Resources\Images\logout_pic.svg" />
 	  <None Remove="Resources\Images\male_avatar.svg" />
 	  <None Remove="Resources\Images\no_internet.svg" />
 	  <None Remove="Resources\Images\ok_logo.png" />
@@ -124,6 +125,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\GroupPayPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LogoutPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\NoInternetPopup.xaml">
