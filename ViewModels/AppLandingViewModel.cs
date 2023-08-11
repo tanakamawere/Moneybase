@@ -10,11 +10,14 @@ namespace Moneybase.ViewModels;
 
 public partial class AppLandingViewModel : ViewModelBase
 {
+    private readonly NoInternetPopup noInternetPopup;
     public AppLandingViewModel(IApiRepository repo, IPopupNavigation popup)
     {
         repository = repo;
         mopupNavigation = popup;
         loadingPopup = new LoadingPopup();
+        noInternetPopup = new NoInternetPopup();
+        networkAccess = Connectivity.Current.NetworkAccess;
     }
 
     [RelayCommand]
@@ -26,26 +29,31 @@ public partial class AppLandingViewModel : ViewModelBase
     [RelayCommand]
     private async Task SignIn()
     {
-        await mopupNavigation.PushAsync(loadingPopup);
-        AuthenticationResult authenticationResult = await publicClientSingleton.AcquireTokenSilentAsync();
-
-        if (!authenticationResult.Account.Equals(null))
+        if (CheckForInternet().Equals(true))
         {
-            FirstTimeUser userIsNew = await repository.UserIsNew(authenticationResult.UniqueId);
-            if (userIsNew.IsNew.Equals(false))
-                await Shell.Current.GoToAsync(nameof(SecurityPINPage));
+            await mopupNavigation.PushAsync(loadingPopup);
+            AuthenticationResult authenticationResult = await publicClientSingleton.AcquireTokenSilentAsync();
+
+            if (!authenticationResult.Account.Equals(null))
+            {
+                FirstTimeUser userIsNew = await repository.UserIsNew(authenticationResult.UniqueId);
+                if (userIsNew.IsNew.Equals(false))
+                    await Shell.Current.GoToAsync(nameof(SecurityPINPage));
+                else
+                {
+                    string emailYangu = authenticationResult.ClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "emails").Value.ToString();
+                    await Shell.Current.GoToAsync($"{nameof(OnboardingDetailsPage)}?onboardingEmail={emailYangu}");
+                }
+                await mopupNavigation.PopAsync(true);
+            }
             else
             {
-                string emailYangu = authenticationResult.ClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "emails").Value.ToString();
-                await Shell.Current.GoToAsync($"{nameof(OnboardingDetailsPage)}?onboardingEmail={emailYangu}");
+                await Shell.Current.DisplayAlert("Authentication failed", "Please try again", "Cancel");
+                await mopupNavigation.PopAsync(true);
             }
-            await mopupNavigation.PopAsync(true);
         }
         else
-        {
-            await Shell.Current.DisplayAlert("Authentication failed", "Please try again", "Cancel");
-            await mopupNavigation.PopAsync(true);
-        }
+            ShowNoInternetPopup();
     }
 
     public void CheckIfLoggedIn()
@@ -61,4 +69,6 @@ public partial class AppLandingViewModel : ViewModelBase
             Shell.Current.DisplayAlert("Error", "There's been an error trying to automatically log you in. Please try again", "Ok");
         }
     }
+
+    public void ShowNoInternetPopup() => mopupNavigation.PushAsync(noInternetPopup);
 }

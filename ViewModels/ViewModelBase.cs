@@ -21,7 +21,7 @@ public partial class ViewModelBase : ObservableObject
     public IPopupNavigation mopupNavigation;
     public readonly PublicClientSingleton publicClientSingleton;
     public LoadingPopup loadingPopup;
-
+    public NetworkAccess networkAccess;
     public ViewModelBase()
     { 
         publicClientSingleton = new PublicClientSingleton();
@@ -32,7 +32,16 @@ public partial class ViewModelBase : ObservableObject
         }
         catch (Exception ex)
         {
-            Shell.Current.DisplayAlert("Oops...", "That wasn't supposed to happen. Please restart the app.", "Ok");
+            Console.WriteLine(ex);
         }
+    }
+
+
+    public bool CheckForInternet()
+    {
+        bool internet = false;
+        if (networkAccess.Equals(NetworkAccess.Internet))
+            internet = true;
+        return internet;
     }
 }

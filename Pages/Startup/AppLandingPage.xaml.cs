@@ -1,8 +1,3 @@
-using CommunityToolkit.Maui.Alerts;
-using Microsoft.Identity.Client;
-using Microsoft.Maui.ApplicationModel.Communication;
-using Moneybase.MSALClient;
-using Moneybase.Services;
 using Moneybase.ViewModels;
 namespace Moneybase.Pages;
 
@@ -19,6 +14,12 @@ public partial class AppLandingPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        viewModel.CheckIfLoggedIn();
+
+        if (viewModel.CheckForInternet().Equals(true))
+        {
+            viewModel.CheckIfLoggedIn();
+        }
+        else 
+            viewModel.ShowNoInternetPopup();
     }
 }
