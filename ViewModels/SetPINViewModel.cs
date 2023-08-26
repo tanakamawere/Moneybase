@@ -32,12 +32,15 @@ public partial class SetPINViewModel : ViewModelBase
             await Toast.Make("PIN can't be empty. Provide one", CommunityToolkit.Maui.Core.ToastDuration.Long, 12).Show(new CancellationToken());
             return; 
         }
+
         User.PIN = PIN;
+
         var result = await repository.PostUser(User);
 
         if (result.Equals(true))
         {
             await Toast.Make("User created successfully", CommunityToolkit.Maui.Core.ToastDuration.Long, 12).Show(new CancellationToken());
+            await SecureStorage.SetAsync(userPhoneSecret, User.PhoneNumber);
             Application.Current.MainPage = new AppShell();
         }
         else

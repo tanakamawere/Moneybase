@@ -23,7 +23,7 @@ public partial class WalletViewModel : ViewModelBase
         repository = repo;
         mopupNavigation = popup;
         loadingPopup = new LoadingPopup();
-        requestCardPopup = new RequestCardPopup(repository, AuthenticationResult.UniqueId);
+        requestCardPopup = new RequestCardPopup(repository, UserPhoneNumber);
         InitMethods();
     }
     [RelayCommand]
@@ -47,11 +47,11 @@ public partial class WalletViewModel : ViewModelBase
 
     private async Task GetVirtualCards()
     {
-        UserCards = await repository.GetVirtualCards(AuthenticationResult.UniqueId);
+        UserCards = await repository.GetVirtualCards(UserPhoneNumber);
     }
     private async Task GetSavingsAccounts()
     {
-        SavingsAccounts = await repository.GetSavingsAccounts(AuthenticationResult.UniqueId);
+        SavingsAccounts = await repository.GetSavingsAccounts(UserPhoneNumber);
     }
 
     [RelayCommand]

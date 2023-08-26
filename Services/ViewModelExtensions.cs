@@ -20,9 +20,11 @@ public static class ViewModelExtensions
         builder.Services.AddTransient<SendMoneyViewModel>();
         builder.Services.AddTransient<AllTransactionViewModel>();
         builder.Services.AddTransient<CreateSavingsViewModel>();
-        builder.Services.AddTransient<OnboardingDetailsViewModel>();
+        builder.Services.AddTransient<SignUpViewModel>();
         builder.Services.AddTransient<SecurityPINViewModel>();
         builder.Services.AddTransient<SetPINViewModel>();
+        builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<OTPPageViewModel>();
 
         return builder;
     }

@@ -10,13 +10,6 @@
     x:DataType="vm:SetPINViewModel">
     <VerticalStackLayout Padding="20">
         <Label
-            Margin="10"
-            FontSize="20"
-            HorizontalOptions="Center"
-            Text="Page 3 of 3"
-            VerticalOptions="Start" />
-
-        <Label
             HorizontalOptions="Center"
             HorizontalTextAlignment="Center"
             Text="Enter a security PIN to enter the app with. It's the same you use for USSD transactions" />

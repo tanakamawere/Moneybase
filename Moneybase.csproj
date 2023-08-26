@@ -62,6 +62,7 @@
 	  <None Remove="Resources\Images\credit_cards.svg" />
 	  <None Remove="Resources\Images\dstv_logo.jpeg" />
 	  <None Remove="Resources\Images\ecocash.png" />
+	  <None Remove="Resources\Images\flag_of_zimbabwe.png" />
 	  <None Remove="Resources\Images\innbucks.png" />
 	  <None Remove="Resources\Images\loading_pic.svg" />
 	  <None Remove="Resources\Images\logout_pic.svg" />
@@ -69,6 +70,7 @@
 	  <None Remove="Resources\Images\no_internet.svg" />
 	  <None Remove="Resources\Images\ok_logo.png" />
 	  <None Remove="Resources\Images\onboarding_data.svg" />
+	  <None Remove="Resources\Images\otp_pic.svg" />
 	  <None Remove="Resources\Images\person_receive.jpg" />
 	  <None Remove="Resources\Images\profile_banner.svg" />
 	  <None Remove="Resources\Images\profile_photo.jpg" />
@@ -83,16 +85,16 @@
 
 	<ItemGroup>
 		<PackageReference Include="Camera.MAUI" Version="1.4.4" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Identity.Client" Version="4.54.1" />
-		<PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="2.31.0" />
 		<PackageReference Include="Mopups" Version="1.1.1" />
 		<PackageReference Include="PinCodes.Authorization.Maui" Version="1.0.1" />
 		<PackageReference Include="PINView.MAUI" Version="1.0.1" />
+		<PackageReference Include="Syncfusion.Maui.Inputs" Version="22.2.10" />
 		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.1" />
+		<PackageReference Include="Twilio" Version="6.11.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -100,8 +102,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\Startup\OnboardingDetailsPage.xaml.cs">
-	    <DependentUpon>OnboardingDetailsPage.xaml</DependentUpon>
+	  <Compile Update="Pages\Startup\SignUpPage.xaml.cs">
+	    <DependentUpon>SignUpPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Startup\SetPINPage.xaml.cs">
 	    <DependentUpon>SetPINPage.xaml</DependentUpon>
@@ -154,6 +156,12 @@
 	  <MauiXaml Update="Pages\RemotePayPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Startup\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Startup\OTPPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Startup\SecurityPINPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -166,7 +174,7 @@
 	  <MauiXaml Update="Pages\SendMoneyPages\SendMoneyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Startup\OnboardingDetailsPage.xaml">
+	  <MauiXaml Update="Pages\Startup\SignUpPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WalletPage.xaml">

@@ -6,6 +6,7 @@ using Moneybase.Pages.SendMoneyPages;
 using Moneybase.Services;
 using Mopups.Hosting;
 using Mopups.Services;
+using Syncfusion.Maui.Core.Hosting;
 using The49.Maui.BottomSheet;
 
 namespace Moneybase;
@@ -22,6 +23,7 @@ public static class MauiProgram
 			.ConfigureMopups()
 			.UseMauiCameraView()
 			.UseBottomSheet()
+			.ConfigureSyncfusionCore()
             .ConfigureViewModels()
 			.ConfigurePages()
             .ConfigureFonts(fonts =>

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Microsoft.Identity.Client;
-using Moneybase.MSALClient;
 using Moneybase.Pages;
+using Moneybase.Pages.Startup;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
 using Mopups.Interfaces;
@@ -27,46 +26,54 @@ public partial class AppLandingViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task SignIn()
+    private async Task SignUp()
     {
         if (CheckForInternet().Equals(true))
         {
-            await mopupNavigation.PushAsync(loadingPopup);
-            AuthenticationResult authenticationResult = await publicClientSingleton.AcquireTokenSilentAsync();
+            await Shell.Current.GoToAsync(nameof(SignUpPage));
+            //AuthenticationResult authenticationResult = await publicClientSingleton.AcquireTokenSilentAsync();
 
-            if (!authenticationResult.Account.Equals(null))
-            {
-                FirstTimeUser userIsNew = await repository.UserIsNew(authenticationResult.UniqueId);
-                if (userIsNew.IsNew.Equals(false))
-                    await Shell.Current.GoToAsync(nameof(SecurityPINPage));
-                else
-                {
-                    string emailYangu = authenticationResult.ClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "emails").Value.ToString();
-                    await Shell.Current.GoToAsync($"{nameof(OnboardingDetailsPage)}?onboardingEmail={emailYangu}");
-                }
-                await mopupNavigation.PopAsync(true);
-            }
-            else
-            {
-                await Shell.Current.DisplayAlert("Authentication failed", "Please try again", "Cancel");
-                await mopupNavigation.PopAsync(true);
-            }
+            //if (!authenticationResult.Account.Equals(null))
+            //{
+            //    FirstTimeUser userIsNew = await repository.UserIsNew(UserPhoneNumber);
+            //    if (userIsNew.IsNew.Equals(false))
+            //        await Shell.Current.GoToAsync(nameof(SecurityPINPage));
+            //    else
+            //    {
+            //        string emailYangu = authenticationResult.ClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "emails").Value.ToString();
+            //        await Shell.Current.GoToAsync($"{nameof(OnboardingDetailsPage)}?onboardingEmail={emailYangu}");
+            //    }
+            //    await mopupNavigation.PopAsync(true);
+            //}
+            //else
+            //{
+            //    await Shell.Current.DisplayAlert("Authentication failed", "Please try again", "Cancel");
+            //    await mopupNavigation.PopAsync(true);
+            //}
         }
         else
             ShowNoInternetPopup();
     }
 
-    public void CheckIfLoggedIn()
+    [RelayCommand]
+    private async Task LogIn()
+    {
+        await Shell.Current.GoToAsync(nameof(LoginPage));
+    }
+
+    public async void CheckIfLoggedIn()
     {
         try
         {
-            AuthenticationResult result = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
-            if (result != null)
-                Shell.Current.GoToAsync(nameof(SecurityPINPage));
+            UserPhoneNumber = await SecureStorage.Default.GetAsync(userPhoneSecret);
+            if (!string.IsNullOrEmpty(UserPhoneNumber)) 
+            {
+                await Shell.Current.GoToAsync($"{nameof(LoginPage)}?alreadyLoggedIn={UserPhoneNumber}");
+            }
         }
         catch (Exception)
         {
-            Shell.Current.DisplayAlert("Error", "There's been an error trying to automatically log you in. Please try again", "Ok");
+            await Shell.Current.DisplayAlert("Error", "There's been an error trying to automatically log you in. Please try again", "Ok");
         }
     }
 

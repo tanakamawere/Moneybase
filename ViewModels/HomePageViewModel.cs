@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Identity.Client;
-using Moneybase.MSALClient;
 using Moneybase.Pages;
 using Moneybase.Pages.DirectPayPages;
 using Moneybase.Pages.SendMoneyPages;
@@ -37,9 +35,9 @@ public partial class HomePageViewModel : ViewModelBase
         await mopupNavigation.PushAsync(loadingPopup);
         try
         {
-            User = await repository.GetUser(AuthenticationResult.UniqueId);
+            User = await repository.GetUser(UserPhoneNumber);
             UserAccounts = User.Accounts.Where(x => x.AccountType != AccountType.Saving).ToList();
-            UserTransactions = await repository.GetTransactionsAsync(AuthenticationResult.UniqueId, 3);
+            UserTransactions = await repository.GetTransactionsAsync(UserPhoneNumber, 3);
         }
         catch (Exception ex)
         {
@@ -53,7 +51,7 @@ public partial class HomePageViewModel : ViewModelBase
 
     //private async Task FirstTimeDetailEntry()
     //{
-    //    string authId = authenticationResult.UniqueId;
+    //    string authId = UserPhoneNumber;
     //    string userIsNew = repository.UserIsNew(authId).Result;
     //    if (userIsNew.Equals(true))
     //        await Shell.Current.DisplayAlert("Hey there", "You are new here", "Coool");

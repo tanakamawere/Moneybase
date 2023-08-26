@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.Startup.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pinview="clr-namespace:PINView.Maui;assembly=PINView.Maui"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    x:DataType="vm:LoginViewModel"
+    Shell.NavBarIsVisible="False">
+    <VerticalStackLayout>
+        <Border BackgroundColor="LightBlue" HeightRequest="300">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
+
+            <Grid Padding="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="10"
+                    VerticalOptions="Center">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="28"
+                        Text="Login" />
+                    <Label Text="One step closer to an amazing banking experience" />
+                </VerticalStackLayout>
+
+                <Image
+                    Grid.Column="1"
+                    HeightRequest="100"
+                    Source="send_money.svg" />
+            </Grid>
+        </Border>
+        <VerticalStackLayout
+            Margin="0,20"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Entry
+                Keyboard="Telephone"
+                Placeholder="Phone Number"
+                Text="{Binding UserPhoneNumber}" />
+
+            <pinview:PINView
+                BoxBackgroundColor="{AppThemeBinding Light={StaticResource Primary},
+                                                     Dark={StaticResource Gray300}}"
+                BoxShape="Circle"
+                PINLength="4"
+                PINValue="{Binding PIN}"
+                Color="White" />
+
+            <Button
+                Margin="20"
+                Command="{Binding LoginCommand}"
+                FontAttributes="Bold"
+                FontSize="20"
+                Style="{StaticResource TransparentButton}"
+                Text="Log In" />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

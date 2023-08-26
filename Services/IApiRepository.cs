@@ -6,10 +6,10 @@ public interface IApiRepository
 {
     Task<IEnumerable<User>> GetUsersAsync();
     Task<IEnumerable<Account>> GetAccountsAsync(string id);
-    Task<IEnumerable<Transaction>> GetTransactionsAsync(string userId, int number);
+    Task<IEnumerable<Transaction>> GetTransactionsAsync(string userPhoneNumber, int number);
 
     Task<User> GetUser(string authId);
-    Task<Account> GetAccount(int userId);
+    Task<Account> GetAccount(int userPhoneNumber);
     Task<FirstTimeUser> UserIsNew(string authId);
     Task<bool> CheckPIN(string authId, string pinString);
 
@@ -17,14 +17,14 @@ public interface IApiRepository
     Task PostAccount(Account account);
     Task PostTransaction(Transaction transaction);
 
-    Task<IEnumerable<VirtualCard>> GetVirtualCards(string userId);
+    Task<IEnumerable<VirtualCard>> GetVirtualCards(string userPhoneNumber);
     Task<bool> ChangeCardBlockStatus(int cardId);
-    Task<bool> CreateCard(string userId);
+    Task<bool> CreateCard(string userPhoneNumber);
     Task<bool> DeleteCard(int cardId);
 
-    Task<bool> CreateSavingsAccount(Account account, string userId);
+    Task<bool> CreateSavingsAccount(Account account, string userPhoneNumber);
     Task<bool> DeleteSavingsAccount(int accountId);
-    Task<IEnumerable<Account>> GetSavingsAccounts(string userId);
+    Task<IEnumerable<Account>> GetSavingsAccounts(string userPhoneNumber);
     Task<Account> GetSavingsAccount (int accountId);
     Task<bool> TransactSavingsAccount(Transaction transaction);
 }

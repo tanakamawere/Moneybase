@@ -28,7 +28,7 @@ public partial class ProfileViewModel : ViewModelBase
         await mopupNavigation.PushAsync(loadingPopup);
         try
         {
-            User = await repository.GetUser(AuthenticationResult.UniqueId);
+            User = await repository.GetUser(UserPhoneNumber);
         }
         catch (Exception ex)
         {
@@ -47,9 +47,8 @@ public partial class ProfileViewModel : ViewModelBase
         await mopupNavigation.PushAsync(loadingPopup);
         try
         {
-            await publicClientSingleton.SignOutAsync();
-
-            await Task.Delay(3000);
+            SecureStorage.RemoveAll();
+            App.Current.MainPage = new LandingShell();
 
             await mopupNavigation.PushAsync(logoutPopup, true);
         }

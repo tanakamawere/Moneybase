@@ -22,6 +22,6 @@ public partial class AllTransactionViewModel : ViewModelBase
     [RelayCommand]
     async Task GetTransactions(int num = 10) 
     {
-        Transactions = await repository.GetTransactionsAsync(AuthenticationResult.UniqueId, num);
+        Transactions = await repository.GetTransactionsAsync(UserPhoneNumber, num);
     }
 }

@@ -83,7 +83,7 @@ public partial class CreateSavingsViewModel : ViewModelBase
             };
         }
 
-        bool result = await repository.CreateSavingsAccount(account, authenticationResult.UniqueId);
+        bool result = await repository.CreateSavingsAccount(account, UserPhoneNumber);
         if (result.Equals(true))
         {
             await Toast.Make("Account created successfully", CommunityToolkit.Maui.Core.ToastDuration.Long, 12).Show(new CancellationToken());

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.Startup.OTPPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pinview="clr-namespace:PINView.Maui;assembly=PINView.Maui"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    x:DataType="vm:OTPPageViewModel"
+    Shell.NavBarIsVisible="False">
+    <VerticalStackLayout>
+        <Border BackgroundColor="LightBlue" HeightRequest="250">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
+
+            <Grid Padding="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="10"
+                    VerticalOptions="Center">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="28"
+                        Text="Step 2/3: Confirm OTP" />
+                    <Label Text="Confirm the OTP sent to your phone" />
+                </VerticalStackLayout>
+
+                <Image
+                    Grid.Column="1"
+                    HeightRequest="100"
+                    Source="otp_pic.svg" />
+            </Grid>
+        </Border>
+        <VerticalStackLayout Margin="0,20">
+            <Label
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Enter a security PIN to enter the app with. It's the same you use for USSD transactions" />
+
+            <pinview:PINView
+                BoxBackgroundColor="{AppThemeBinding Light={StaticResource Primary},
+                                                     Dark={StaticResource Gray300}}"
+                BoxShape="Circle"
+                HorizontalOptions="Center"
+                PINLength="6"
+                PINValue="{Binding UserEnteredOTP}"
+                Color="White" />
+
+            <Button
+                Margin="20"
+                Command="{Binding ConfirmOtpCommand}"
+                Style="{StaticResource TransparentButton}"
+                Text="Get Started"
+                VerticalOptions="End" />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

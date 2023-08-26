@@ -31,15 +31,26 @@
             </Label.FormattedText>
         </Label>
 
-        <Button
-            Margin="20"
-            BorderColor="White"
-            Command="{Binding SignInCommand}"
-            FontAttributes="Bold"
-            FontSize="20"
-            Style="{StaticResource TransparentButton}"
-            Text="Get Started"
-            TextColor="White"
-            VerticalOptions="End" />
+        <VerticalStackLayout VerticalOptions="End">
+            <Button
+                Margin="20"
+                BorderColor="White"
+                Command="{Binding LogInCommand}"
+                FontAttributes="Bold"
+                FontSize="20"
+                Style="{StaticResource TransparentButton}"
+                Text="Log In"
+                TextColor="White" />
+
+            <Button
+                Margin="20"
+                BorderColor="White"
+                Command="{Binding SignUpCommand}"
+                FontAttributes="Bold"
+                FontSize="20"
+                Style="{StaticResource TransparentButton}"
+                Text="Sign Up"
+                TextColor="White" />
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

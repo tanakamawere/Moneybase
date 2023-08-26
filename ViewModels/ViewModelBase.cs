@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Identity.Client;
-using Moneybase.MSALClient;
+using CommunityToolkit.Mvvm.Input;
 using Moneybase.Pages;
 using Moneybase.Services;
 using Mopups.Interfaces;
@@ -13,29 +12,26 @@ public partial class ViewModelBase : ObservableObject
     public bool isBusy;
     [ObservableProperty]
     public string title;
+
     [ObservableProperty]
-    public AuthenticationResult authenticationResult;
+    public string userPhoneNumber;
+
     public IPopupNavigation popups;
+
+    public string userPhoneSecret;
 
     public IApiRepository repository;
     public IPopupNavigation mopupNavigation;
-    public readonly PublicClientSingleton publicClientSingleton;
     public LoadingPopup loadingPopup;
     public NetworkAccess networkAccess;
     public ViewModelBase()
-    { 
-        publicClientSingleton = new PublicClientSingleton();
+    {
+        userPhoneSecret = "userPhoneSecret";
 
-        try
-        {
-            authenticationResult = publicClientSingleton.CheckIfUserAlreadyLoggedIn(Constants.Scopes).Result;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-        }
+        string phoneNumber = SecureStorage.Default.GetAsync(userPhoneSecret).Result;
+        if (!string.IsNullOrEmpty(phoneNumber))
+            UserPhoneNumber = phoneNumber;
     }
-
 
     public bool CheckForInternet()
     {

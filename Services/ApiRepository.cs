@@ -8,7 +8,7 @@ public class ApiRepository : IApiRepository
     private static readonly HttpClient _httpClient = new HttpClient()
     {
         //BaseAddress = new Uri("http://10.0.2.2:5052/")
-        BaseAddress = new Uri("https://327a-217-15-117-112.ngrok-free.app/")
+        BaseAddress = new Uri("https://efd8-197-221-253-49.ngrok-free.app/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()
@@ -21,15 +21,15 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<IEnumerable<Account>>($"/accounts/get/{id}");
     }
 
-    public async Task<IEnumerable<Transaction>> GetTransactionsAsync(string userId, int number)
+    public async Task<IEnumerable<Transaction>> GetTransactionsAsync(string userPhoneNumber, int number)
     {
-        return await _httpClient.GetFromJsonAsync<IEnumerable<Transaction>>($"/transactions_recent/{userId}/{number}");
+        return await _httpClient.GetFromJsonAsync<IEnumerable<Transaction>>($"/transactions_recent/{userPhoneNumber}/{number}");
     }
 
-    public async Task<Account> GetAccount(int userId)
+    public async Task<Account> GetAccount(int userPhoneNumber)
     {
         //DOES NOT WORK
-        return await _httpClient.GetFromJsonAsync<Account>($"/accounts/get/{userId}");
+        return await _httpClient.GetFromJsonAsync<Account>($"/accounts/get/{userPhoneNumber}");
     }
     public async Task<User> GetUser(string authId)
     {
@@ -60,9 +60,9 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<FirstTimeUser>($"/users/user_is_new/{authId}");
     }
 
-    public async Task<bool> CreateCard(string userId)
+    public async Task<bool> CreateCard(string userPhoneNumber)
     {
-        var response = await _httpClient.PostAsJsonAsync($"/virtualcards/createcard/{userId}", userId); 
+        var response = await _httpClient.PostAsJsonAsync($"/virtualcards/createcard/{userPhoneNumber}", userPhoneNumber); 
         if (response.IsSuccessStatusCode)
             return true;
         else
@@ -86,14 +86,14 @@ public class ApiRepository : IApiRepository
             return false;
     }
 
-    public async Task<IEnumerable<VirtualCard>> GetVirtualCards(string userId)
+    public async Task<IEnumerable<VirtualCard>> GetVirtualCards(string userPhoneNumber)
     {
-        return await _httpClient.GetFromJsonAsync<IEnumerable<VirtualCard>>($"/virtualcards/getcards/{userId}");
+        return await _httpClient.GetFromJsonAsync<IEnumerable<VirtualCard>>($"/virtualcards/getcards/{userPhoneNumber}");
     }
 
-    public async Task<bool> CreateSavingsAccount(Account account, string userId)
+    public async Task<bool> CreateSavingsAccount(Account account, string userPhoneNumber)
     {
-        var response = await _httpClient.PostAsJsonAsync($"/savings/create/{account}/{userId}", account);
+        var response = await _httpClient.PostAsJsonAsync($"/savings/create/{account}/{userPhoneNumber}", account);
         if (response.IsSuccessStatusCode)
             return true;
         else
@@ -109,9 +109,9 @@ public class ApiRepository : IApiRepository
             return false;
     }
 
-    public async Task<IEnumerable<Account>> GetSavingsAccounts(string userId)
+    public async Task<IEnumerable<Account>> GetSavingsAccounts(string userPhoneNumber)
     {
-        return await _httpClient.GetFromJsonAsync<IEnumerable<Account>>($"/savings/get_accounts/{userId}");
+        return await _httpClient.GetFromJsonAsync<IEnumerable<Account>>($"/savings/get_accounts/{userPhoneNumber}");
     }
 
     public async Task<Account> GetSavingsAccount(int accountId)
