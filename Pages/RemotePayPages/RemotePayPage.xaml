@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Moneybase.Pages.RemotePayPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Moneybase.Converters"
+    xmlns:helpers="clr-namespace:Moneybase.Helpers"
+    xmlns:models="clr-namespace:MoneybaseLibrary.Models;assembly=MoneybaseLibrary"
+    xmlns:vm="clr-namespace:Moneybase.ViewModels"
+    Title="Remote Pay"
+    x:DataType="vm:RemotePayViewModel"
+    Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <RefreshView Command="{Binding InitMethodsCommand}" IsRefreshing="{Binding InitMethodsCommand.IsRunning}">
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <CollectionView
+                EmptyView="No remote pay transactions to show"
+                Header="Remote Pay Sessions"
+                ItemsSource="{Binding RemotePaySessions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:RemotePay">
+                        <Border
+                            Padding="5,10"
+                            Stroke="{StaticResource Gray500}"
+                            StrokeShape="RoundRectangle 20"
+                            StrokeThickness="0">
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
+                                                                      Dark={StaticResource Gray900}}"
+                                    HeightRequest="20"
+                                    WidthRequest="20">
+                                    <Image.Source>
+                                        <FontImageSource
+                                            FontFamily="fasolid"
+                                            Glyph="{x:Static helpers:FontAwesome.Bell}"
+                                            Size="20"
+                                            Color="{AppThemeBinding Light={StaticResource Primary},
+                                                                    Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Body"
+                                        VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Remotee: +263-" />
+                                                <Span Text="{Binding UserToPay.PhoneNumber}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Body"
+                                        VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Date: " />
+                                                <Span Text="{Binding DateTimeExpired}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Body"
+                                        VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Amount: " />
+                                                <Span Text="{Binding Amount}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </VerticalStackLayout>
+
+                                <Label
+                                    Grid.Column="2"
+                                    Text="{Binding IsActive, Converter={StaticResource BoolToStringConverter}}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Command="{Binding OpenCreateNewSessionCommand}" Text="Create Remote Pay Session" />
+        </VerticalStackLayout>
+    </RefreshView>
+</ContentPage>

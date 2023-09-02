@@ -1,3 +1,5 @@
+using Mopups.Services;
+
 namespace Moneybase.Pages;
 
 public partial class LogoutPopup 
@@ -9,6 +11,6 @@ public partial class LogoutPopup
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-		Application.Current.Quit();
+		MopupService.Instance.PopAsync();
     }
 }

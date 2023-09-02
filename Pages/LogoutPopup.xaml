@@ -46,7 +46,7 @@
             <Button
                 Clicked="Button_Clicked"
                 Style="{StaticResource TransparentButton}"
-                Text="Quit" />
+                Text="Close" />
         </VerticalStackLayout>
     </Border>
 </mopups:PopupPage>

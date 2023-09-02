@@ -25,6 +25,7 @@ public static class ViewModelExtensions
         builder.Services.AddTransient<SetPINViewModel>();
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<OTPPageViewModel>();
+        builder.Services.AddTransient<CreateRemoteSessionViewModel>();
 
         return builder;
     }

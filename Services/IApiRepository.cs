@@ -27,4 +27,18 @@ public interface IApiRepository
     Task<IEnumerable<Account>> GetSavingsAccounts(string userPhoneNumber);
     Task<Account> GetSavingsAccount (int accountId);
     Task<bool> TransactSavingsAccount(Transaction transaction);
+
+    //REMOTE PAY
+    Task<bool> CheckForActiveRemotePaySession(string userPhoneNumber);
+    Task CreateRemoteSession(RemotePayClientSideDto remotePay);
+    Task InitiateRemotePayment(RemotePayTransactionDto RemotePayTransactionDto);
+    Task<IEnumerable<RemotePay>> GetRemotePays(string userPhoneNumber);
+    Task DeleteRemotePayment(RemotePay payment);
+    Task InactivateRemotePayment(RemotePay payment);
+
+    //GROUP PAY
+    Task CreateGroupPayment(GroupPay payment);
+    Task DeleteGroupPayment(GroupPay payment);
+    Task MakeParticipantConfirmation(GroupPayParticipant participant);
+    Task InitiateGroupPayment(GroupPay payment);
 }

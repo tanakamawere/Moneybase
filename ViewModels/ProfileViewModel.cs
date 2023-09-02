@@ -44,7 +44,6 @@ public partial class ProfileViewModel : ViewModelBase
     [RelayCommand]
     private async Task SignOut()
     {
-        await mopupNavigation.PushAsync(loadingPopup);
         try
         {
             SecureStorage.RemoveAll();

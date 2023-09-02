@@ -8,7 +8,7 @@
     x:DataType="vm:LoginViewModel"
     Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <Border BackgroundColor="LightBlue" HeightRequest="300">
+        <Border BackgroundColor="Red" HeightRequest="300">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="0,0,20,20" />
             </Border.StrokeShape>
@@ -40,15 +40,38 @@
             Margin="0,20"
             HorizontalOptions="Center"
             VerticalOptions="Center">
-            <Entry
-                Keyboard="Telephone"
-                Placeholder="Phone Number"
-                Text="{Binding UserPhoneNumber}" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border BackgroundColor="LightGray" StrokeShape="RoundRectangle 10">
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Image
+                            HeightRequest="20"
+                            Source="flag_of_zimbabwe.png"
+                            WidthRequest="20" />
+                        <Label
+                            Grid.Column="0"
+                            Margin="5"
+                            HorizontalOptions="Center"
+                            Text="+263"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+                <Entry
+                    Grid.Column="1"
+                    Keyboard="Telephone"
+                    Placeholder="Phone Number eg 712345798"
+                    Text="{Binding UserPhoneNumber}" />
+            </Grid>
 
             <pinview:PINView
                 BoxBackgroundColor="{AppThemeBinding Light={StaticResource Primary},
                                                      Dark={StaticResource Gray300}}"
                 BoxShape="Circle"
+                HorizontalOptions="Center"
                 PINLength="4"
                 PINValue="{Binding PIN}"
                 Color="White" />
