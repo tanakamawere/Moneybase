@@ -6,9 +6,9 @@ namespace Moneybase.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string title = "Is Active";
+            string title = "";
             if (value.Equals(false))
-                title = "Inactive";
+                title = "Cancelled";
             return title;
         }
 

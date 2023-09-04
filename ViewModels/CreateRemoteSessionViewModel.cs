@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Moneybase.Pages;
+using Moneybase.Pages.RemotePayPages;
 using Moneybase.Services;
 using MoneybaseLibrary.Models;
 using Mopups.Interfaces;
+using The49.Maui.BottomSheet;
 
 namespace Moneybase.ViewModels
 {
@@ -14,10 +16,14 @@ namespace Moneybase.ViewModels
         [ObservableProperty]
         string remoteSessionAmount;
 
-        public CreateRemoteSessionViewModel(IApiRepository repo, IPopupNavigation popup)
+        BottomSheet bottomSheet;
+
+        public CreateRemoteSessionViewModel(IApiRepository repo, IPopupNavigation popup, BottomSheet _bottomSheet)
         {
             repository = repo;
             mopupNavigation = popup;
+            bottomSheet = _bottomSheet;
+
             loadingPopup = new LoadingPopup();
         }
 
@@ -26,6 +32,8 @@ namespace Moneybase.ViewModels
         {
             try
             {
+                await bottomSheet.DismissAsync();
+                await mopupNavigation.PushAsync(loadingPopup);
                 RemotePayClientSideDto remotePayClientDto = new()
                 {
                     phoneNumberUserToPay = RemoteSessionPhoneNumber,
@@ -38,11 +46,17 @@ namespace Moneybase.ViewModels
                 };
                 remotePayClientDto.RemotePay = remotePay;
 
-                await repository.CreateRemoteSession(remotePayClientDto);
+                var response = await repository.CreateRemoteSession(remotePayClientDto);
+
+                Console.WriteLine(response);
             }
             catch (Exception ex)
             {
                 await Shell.Current.DisplayAlert("Error", $"Something is wrong: {ex}", "Okay");
+            }
+            finally 
+            {
+                await mopupNavigation.PopAsync(true);  
             }
         }
     }

@@ -19,13 +19,13 @@ public partial class ProfileViewModel : ViewModelBase
         mopupNavigation = popup;
         loadingPopup = new LoadingPopup();
         logoutPopup = new LogoutPopup();
+
         GetUser();
     }
 
     [RelayCommand]
     private async Task GetUser()
     {
-        await mopupNavigation.PushAsync(loadingPopup);
         try
         {
             User = await repository.GetUser(UserPhoneNumber);
@@ -33,10 +33,6 @@ public partial class ProfileViewModel : ViewModelBase
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-        }
-        finally
-        {
-            await mopupNavigation.PopAsync(true);
         }
     }
 
@@ -47,7 +43,7 @@ public partial class ProfileViewModel : ViewModelBase
         try
         {
             SecureStorage.RemoveAll();
-            App.Current.MainPage = new LandingShell();
+            Application.Current.MainPage = new LandingShell();
 
             await mopupNavigation.PushAsync(logoutPopup, true);
         }

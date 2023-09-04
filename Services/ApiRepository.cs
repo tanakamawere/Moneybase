@@ -7,8 +7,8 @@ public class ApiRepository : IApiRepository
 {
     private static readonly HttpClient _httpClient = new HttpClient()
     {
-        //BaseAddress = new Uri("http://10.0.2.2:5052/")
-        BaseAddress = new Uri("https://cbd6-197-221-253-29.ngrok-free.app/")
+        BaseAddress = new Uri("http://10.0.2.2:5052/")
+        //BaseAddress = new Uri("https://cbd6-197-221-253-29.ngrok-free.app/")
     };
 
     public async Task<IEnumerable<User>> GetUsersAsync()
@@ -119,7 +119,7 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<Account>($"/savings/get_single/{accountId}");
     }
 
-    public async Task<bool> TransactSavingsAccount(MoneybaseLibrary.Models.Transaction transaction)
+    public async Task<bool> TransactSavingsAccount(Transaction transaction)
     {
         var response = await _httpClient.PostAsJsonAsync($"/savings/transact/{transaction}", transaction);
         if (response.IsSuccessStatusCode)
@@ -152,9 +152,9 @@ public class ApiRepository : IApiRepository
     {
         await _httpClient.DeleteAsync($"/remote_pay/delete_session/{payment}");
     }
-    public async Task CreateRemoteSession(RemotePayClientSideDto remotePayClientDto)
+    public async Task<object> CreateRemoteSession(RemotePayClientSideDto remotePayClientDto)
     {
-        await _httpClient.PostAsJsonAsync($"/remote_pay/create_session/{remotePayClientDto}", remotePayClientDto);
+        return await _httpClient.PostAsJsonAsync($"/remote_pay/create_session/{remotePayClientDto}", remotePayClientDto);
     }
 
     public async Task InactivateRemotePayment(RemotePay payment)

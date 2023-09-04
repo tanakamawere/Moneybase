@@ -30,7 +30,7 @@ public interface IApiRepository
 
     //REMOTE PAY
     Task<bool> CheckForActiveRemotePaySession(string userPhoneNumber);
-    Task CreateRemoteSession(RemotePayClientSideDto remotePay);
+    Task<object> CreateRemoteSession(RemotePayClientSideDto remotePay);
     Task InitiateRemotePayment(RemotePayTransactionDto RemotePayTransactionDto);
     Task<IEnumerable<RemotePay>> GetRemotePays(string userPhoneNumber);
     Task DeleteRemotePayment(RemotePay payment);

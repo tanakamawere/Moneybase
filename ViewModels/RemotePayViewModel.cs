@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Moneybase.Pages;
 using Moneybase.Pages.RemotePayPages;
@@ -33,5 +34,27 @@ public partial class RemotePayViewModel : ViewModelBase
     {
         var createSessionSheet = new CreateRemotePayBottomSheet(repository, mopupNavigation);
         await createSessionSheet.ShowAsync();
+    }
+
+    [RelayCommand]
+    async Task CancelRemoteSession(RemotePay remote)
+    {
+        if (remote == null) return;
+
+        if (remote.IsActive.Equals(false) || remote.DateTimeExpired < DateTime.Now)
+        {
+            await Toast.Make("Remote session already is cancelled or has expired.", CommunityToolkit.Maui.Core.ToastDuration.Short, 12).Show();
+        }
+        else
+        {
+            string response = await Shell.Current.DisplayActionSheet("Cancel remote session?", "Dismiss", null, "Yes", "No");
+
+            if (response.Equals("Yes"))
+            {
+                await mopupNavigation.PushAsync(loadingPopup);
+                await repository.InactivateRemotePayment(remote);
+                await mopupNavigation.PopAsync(true);
+            }
+        }
     }
 }

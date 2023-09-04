@@ -41,7 +41,7 @@
             <Button
                 Command="{Binding CreateRemoteSessionCommand}"
                 HorizontalOptions="Center"
-                Text="Send"
+                Text="Create"
                 VerticalOptions="End" />
         </VerticalStackLayout>
 
