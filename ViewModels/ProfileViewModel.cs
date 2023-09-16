@@ -28,7 +28,7 @@ public partial class ProfileViewModel : ViewModelBase
     {
         try
         {
-            User = await repository.GetUser(UserPhoneNumber);
+            User = await repository.GetUserAsync(UserPhoneNumber);
         }
         catch (Exception ex)
         {

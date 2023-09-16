@@ -33,9 +33,13 @@ public partial class SetPINViewModel : ViewModelBase
             return; 
         }
 
-        User.PIN = PIN;
+        RegisterRequest registerRequest = new()
+        {
+            User = User,
+            PIN = PIN
+        };
 
-        var result = await repository.PostUser(User);
+        var result = await repository.RegisterUserAsync(registerRequest);
 
         if (result.Equals(true))
         {

@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Moneybase.Services;
+using MoneybaseLibrary.Models;
 using Mopups.Interfaces;
+using System.Net.NetworkInformation;
+using Twilio.Types;
 
 namespace Moneybase.ViewModels;
 
@@ -15,14 +18,22 @@ public partial class SecurityPINViewModel : ViewModelBase
 
 
     [RelayCommand]
-    public async Task CheckPin(string code)
+    public async Task CheckPin(string PIN)
     {
 
         //if response is true, it means the user's pin is correct. Move on
         await mopupNavigation.PushAsync(loadingPopup);
         try
         {
-            bool response = await repository.CheckPIN(UserPhoneNumber, code);
+            AuthUser authUser = new() 
+            {
+                PhoneNumber = UserPhoneNumber,
+                PIN = PIN
+            };
+            var response = await repository.LoginUserAsync(authUser);
+
+            string somehing = "1";
+
             if (response.Equals(true))
             {
                 Application.Current.MainPage = new AppShell();

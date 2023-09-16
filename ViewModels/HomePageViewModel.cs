@@ -35,7 +35,7 @@ public partial class HomePageViewModel : ViewModelBase
         await mopupNavigation.PushAsync(loadingPopup);
         try
         {
-            User = await repository.GetUser(UserPhoneNumber);
+            User = await repository.GetUserWithCurrentAccountsAsync(UserPhoneNumber);
             UserAccounts = User.Accounts.Where(x => x.AccountType != AccountType.Saving).ToList();
             UserTransactions = await repository.GetTransactionsAsync(UserPhoneNumber, 3);
         }

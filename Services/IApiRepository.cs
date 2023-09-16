@@ -4,16 +4,16 @@ namespace Moneybase.Services;
 
 public interface IApiRepository
 {
-    Task<IEnumerable<User>> GetUsersAsync();
     Task<IEnumerable<Account>> GetAccountsAsync(string id);
     Task<IEnumerable<Transaction>> GetTransactionsAsync(string userPhoneNumber, int number);
 
-    Task<User> GetUser(string authId);
-    Task<Account> GetAccount(int userPhoneNumber);
-    Task<FirstTimeUser> UserIsNew(string authId);
-    Task<bool> CheckPIN(string authId, string pinString);
+    //Authentication
+    Task<bool> RegisterUserAsync(RegisterRequest registerRequest);
+    Task<User> GetUserWithCurrentAccountsAsync(string userPhoneNumber);
+    Task<FirstTimeUser> UserIsNew(string userPhoneNumber);
+    Task<bool> LoginUserAsync(AuthUser authUser);
+    Task<User> GetUserAsync(string userPhoneNumber);
 
-    Task<bool> PostUser(User user);
     Task PostAccount(Account account);
     Task PostTransaction(Transaction transaction);
 
@@ -37,7 +37,7 @@ public interface IApiRepository
     Task InactivateRemotePayment(RemotePay payment);
 
     //GROUP PAY
-    Task CreateGroupPayment(GroupPay payment);
+    Task<bool> CreateGroupPayment(GroupPay payment);
     Task DeleteGroupPayment(GroupPay payment);
     Task MakeParticipantConfirmation(GroupPayParticipant participant);
     Task InitiateGroupPayment(GroupPay payment);

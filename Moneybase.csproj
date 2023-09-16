@@ -92,6 +92,7 @@
 		<PackageReference Include="Mopups" Version="1.1.1" />
 		<PackageReference Include="PinCodes.Authorization.Maui" Version="1.0.1" />
 		<PackageReference Include="PINView.MAUI" Version="1.0.1" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 		<PackageReference Include="Syncfusion.Maui.Inputs" Version="22.2.10" />
 		<PackageReference Include="The49.Maui.BottomSheet" Version="1.0.1" />
 		<PackageReference Include="Twilio" Version="6.11.0" />
@@ -129,7 +130,10 @@
 	  <MauiXaml Update="Pages\DirectPayPages\PayOptionsSheet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\GroupPayPage.xaml">
+	  <MauiXaml Update="Pages\GroupPayPages\AddParticipantPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\GroupPayPages\GroupPayPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LogoutPopup.xaml">

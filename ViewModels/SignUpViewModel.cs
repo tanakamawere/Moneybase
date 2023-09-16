@@ -52,8 +52,9 @@ public partial class SignUpViewModel : ViewModelBase
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                await mopupNavigation.PopAsync();
                 await Shell.Current.DisplayAlert("A bit of a niggle there", "These things happen from time to time. Please try again the operation", "Okay");
             }
         }

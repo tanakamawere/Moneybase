@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    x:Class="Moneybase.Pages.GroupPayPages.AddParticipantPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+    Color="{AppThemeBinding Light={StaticResource White},
+                            Dark={StaticResource Gray600}}">
+
+    <VerticalStackLayout Margin="30" Padding="20">
+        <Border BackgroundColor="LightBlue" HeightRequest="50">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,20,20" />
+            </Border.StrokeShape>
+            <Grid>
+
+                <Label x:Name="participantName" Text="Name Preview" />
+                <ActivityIndicator
+                    x:Name="loadingIndicator"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Border>
+        <Entry
+            Keyboard="Telephone"
+            Placeholder="Phone Number"
+            TextChanged="Entry_TextChanged" />
+        <Entry
+            x:Name="amountToPayEntry"
+            Keyboard="Numeric"
+            MaxLength="5"
+            Placeholder="Amount" />
+        <Button Clicked="AddParticipant" Text="Add" />
+    </VerticalStackLayout>
+</mct:Popup>

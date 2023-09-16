@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Moneybase.Services;
+using MoneybaseLibrary.Models;
 using Mopups.Interfaces;
+using Twilio.Types;
 
 namespace Moneybase.ViewModels;
 
@@ -26,7 +28,12 @@ public partial class LoginViewModel : ViewModelBase
         await mopupNavigation.PushAsync(loadingPopup);
         try
         {
-            bool response = await repository.CheckPIN(UserPhoneNumber, PIN);
+            AuthUser authUser = new() 
+            {
+                PhoneNumber = UserPhoneNumber,
+                PIN = PIN
+            };
+            bool response = await repository.LoginUserAsync(authUser);
             if (response.Equals(true))
             {
                 //If there is a number in the secure storage, it means the user is already logged in

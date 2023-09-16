@@ -5,15 +5,48 @@ namespace Moneybase.Services;
 
 public class ApiRepository : IApiRepository
 {
-    private static readonly HttpClient _httpClient = new HttpClient()
+    private static readonly HttpClient _httpClient = new()
     {
-        BaseAddress = new Uri("http://10.0.2.2:5052/")
-        //BaseAddress = new Uri("https://cbd6-197-221-253-29.ngrok-free.app/")
+        //BaseAddress = new Uri("http://10.0.2.2:5052/")
+        BaseAddress = new Uri("https://ce0d-77-246-55-236.ngrok-free.app/")
     };
 
-    public async Task<IEnumerable<User>> GetUsersAsync()
+
+    //Gets user with associated accounts for home page
+    public async Task<User> GetUserWithCurrentAccountsAsync(string userPhoneNumber)
     {
-        return await _httpClient.GetFromJsonAsync<IEnumerable<User>>("/users");
+        return await _httpClient.GetFromJsonAsync<User>($"/users/get_user_with_accounts/{userPhoneNumber}");
+    }
+    public async Task<User> GetUserAsync(string userPhoneNumber)
+    {
+        return await _httpClient.GetFromJsonAsync<User>($"/users/get_user/{userPhoneNumber}");
+    }
+
+    //Authentication
+    public async Task<bool> RegisterUserAsync(RegisterRequest registerRequest)
+    {
+        var response = await _httpClient.PostAsJsonAsync($"/auth/register", registerRequest);
+        if (response.IsSuccessStatusCode)
+            return true;
+        else
+            return false;
+    }
+
+    public async Task<bool> LoginUserAsync(AuthUser authUser)
+    {
+        bool isAuthenticated = false;
+        var response = await _httpClient.PostAsJsonAsync($"/auth/login", authUser);
+
+        //Check if response is Ok or Bad Request
+        if (response.IsSuccessStatusCode)
+            isAuthenticated = true;
+        else if (response.StatusCode.Equals(System.Net.HttpStatusCode.Unauthorized))  
+            isAuthenticated = false;
+            return isAuthenticated;
+    }
+    public async Task<FirstTimeUser> UserIsNew(string userPhoneNumber)
+    {
+        return await _httpClient.GetFromJsonAsync<FirstTimeUser>($"/auth/is_new/{userPhoneNumber}");
     }
 
     public async Task<IEnumerable<Account>> GetAccountsAsync(string id)
@@ -26,15 +59,6 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<IEnumerable<Transaction>>($"/transactions_recent/{userPhoneNumber}/{number}");
     }
 
-    public async Task<Account> GetAccount(int userPhoneNumber)
-    {
-        //DOES NOT WORK
-        return await _httpClient.GetFromJsonAsync<Account>($"/accounts/get/{userPhoneNumber}");
-    }
-    public async Task<User> GetUser(string authId)
-    {
-        return await _httpClient.GetFromJsonAsync<User>($"/users/get/{authId}");
-    }
 
     public async Task PostAccount(Account account)
     {
@@ -44,20 +68,6 @@ public class ApiRepository : IApiRepository
     public async Task PostTransaction(Transaction transaction)
     {
         await _httpClient.PostAsJsonAsync($"/transaction/post/{transaction}", transaction);
-    }
-
-    public async Task<bool> PostUser(User user)
-    {
-        var response = await _httpClient.PostAsJsonAsync($"/users/add/{user}", user);
-        if (response.IsSuccessStatusCode)
-            return true;
-        else 
-            return false;
-    }
-
-    public async Task<FirstTimeUser> UserIsNew(string authId)
-    {
-        return await _httpClient.GetFromJsonAsync<FirstTimeUser>($"/users/user_is_new/{authId}");
     }
 
     public async Task<bool> CreateCard(string userPhoneNumber)
@@ -128,11 +138,6 @@ public class ApiRepository : IApiRepository
             return false;
     }
 
-    public async Task<bool> CheckPIN(string authId, string pinString)
-    {
-        var response = await _httpClient.GetStringAsync($"/users/check_pin/{authId}/{pinString}");
-        return bool.Parse(response);
-    }
 
     public async Task<bool> CheckForActiveRemotePaySession(string userPhoneNumber)
     {
@@ -167,9 +172,13 @@ public class ApiRepository : IApiRepository
         return await _httpClient.GetFromJsonAsync<IEnumerable<RemotePay>>($"/remote_pay/get_list/{userPhoneNumber}");
     }
 
-    public async Task CreateGroupPayment(GroupPay payment)
+    public async Task<bool> CreateGroupPayment(GroupPay payment)
     {
-        await _httpClient.PostAsJsonAsync($"/group_pay/post_session/{payment}", payment);
+        bool isSuccessful = false;
+        var response = await _httpClient.PostAsJsonAsync("/group_pay/post_session/", payment);
+        if (response.IsSuccessStatusCode)
+            isSuccessful = true;
+        return isSuccessful;
     }
 
     public async Task DeleteGroupPayment(GroupPay payment)
