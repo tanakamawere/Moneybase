@@ -57,7 +57,8 @@
 	  <None Remove="Resources\Fonts\fabrands.otf" />
 	  <None Remove="Resources\Fonts\faregular.otf" />
 	  <None Remove="Resources\Fonts\fasolid.otf" />
-	  <None Remove="Resources\Images\applandingpic.jpg" />
+	  <None Remove="Resources\Images\applandingdark.png" />
+	  <None Remove="Resources\Images\applandinglight.png" />
 	  <None Remove="Resources\Images\card_background.jpg" />
 	  <None Remove="Resources\Images\credit_cards.svg" />
 	  <None Remove="Resources\Images\dstv_logo.jpeg" />

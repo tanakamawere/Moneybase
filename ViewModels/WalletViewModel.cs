@@ -47,11 +47,26 @@ public partial class WalletViewModel : ViewModelBase
 
     private async Task GetVirtualCards()
     {
-        UserCards = await repository.GetVirtualCards(UserPhoneNumber);
+        try
+        {
+            UserCards = await repository.GetVirtualCards(UserPhoneNumber);
+        }
+        catch (Exception)
+        {
+            //Handle exception
+            throw;
+        }
     }
     private async Task GetSavingsAccounts()
     {
-        SavingsAccounts = await repository.GetSavingsAccounts(UserPhoneNumber);
+        try
+        {
+            SavingsAccounts = await repository.GetSavingsAccounts(UserPhoneNumber);
+        }
+        catch (Exception)
+        { 
+            throw;
+        }
     }
 
     [RelayCommand]

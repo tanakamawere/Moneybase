@@ -50,7 +50,7 @@ public partial class AddParticipantPopup : Popup
 			{
                 if (user.Result != null)
 				{
-					participant.Participant = user.Result;
+					participant.ParticipantPhoneNumber = user.Result.PhoneNumber;
 					participantName.Text = user.Result.Name;
                 }
             });

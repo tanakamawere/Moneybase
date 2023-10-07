@@ -7,6 +7,7 @@ using Moneybase.Services;
 using MoneybaseLibrary.Models;
 using Mopups.Interfaces;
 using MvvmHelpers;
+using Newtonsoft.Json;
 
 namespace Moneybase.ViewModels;
 
@@ -79,7 +80,7 @@ public partial class GroupPayViewModel : ViewModelBase
             //Create group pay particiant object for initiator
             GroupPayParticipant initiator = new()
             {
-                Participant = await repository.GetUserAsync(UserPhoneNumber),
+                ParticipantPhoneNumber = UserPhoneNumber,
                 ParticipantType = ParticipantType.Initiator,
                 Amount = InitiatorAmount
             };
@@ -100,6 +101,9 @@ public partial class GroupPayViewModel : ViewModelBase
 
             //Post group pay object to API
             bool isSuccessful = await repository.CreateGroupPayment(groupPay);
+
+            //Convert group pay object to JSON string
+            string groupPayJson = JsonConvert.SerializeObject(groupPay);
 
             if(isSuccessful.Equals(true))
             {

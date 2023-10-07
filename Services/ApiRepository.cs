@@ -1,4 +1,5 @@
-﻿using MoneybaseLibrary.Models;
+﻿using Moneybase.Helpers;
+using MoneybaseLibrary.Models;
 using System.Net.Http.Json;
 
 namespace Moneybase.Services;
@@ -7,8 +8,7 @@ public class ApiRepository : IApiRepository
 {
     private static readonly HttpClient _httpClient = new()
     {
-        //BaseAddress = new Uri("http://10.0.2.2:5052/")
-        BaseAddress = new Uri("https://ce0d-77-246-55-236.ngrok-free.app/")
+        BaseAddress = new Uri(Constants.ApiUrl())
     };
 
 
